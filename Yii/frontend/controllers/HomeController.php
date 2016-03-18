@@ -9,7 +9,7 @@ class HomeController extends BaseFrontController
 {
     public function actionIndex()
     {
-       
+        
     	//$follow= Route::find()->all();
     	$Route = new Route;
         $s = $Route->get_defaultPage($Route->db->from($Route::tableName()),['pageSize'=>3]);
