@@ -1,0 +1,5 @@
+Options +FollowSymLinks 
+IndexIgnore */* 
+RewriteEngine on 
+RewriteRule ^(.*)(\.css|\.ico|\.gif|\.png|\.jpg|\.jpeg|\.bmp|\.swf|\.js|\.doc|\.docx|\.pdf|\.txt|\.eot|\.svg|\.ttf|\.woff|\.woff2|\.html)$ - [L]
+RewriteRule . index.php
