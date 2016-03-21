@@ -1,7 +1,7 @@
 <?php
 $data        = dirname(dirname(dirname(__DIR__))).'/data/';
-$runtimePath = $data.APP_DIR.'_runtime';
-$sessionPath = $data.APP_DIR.'_session';
+$runtimePath = $data.'_runtime';
+$sessionPath = $data.'_session';
 $Ymd         = date('Y-m-d');
 $config = [
     'vendorPath'  =>dirname(dirname(__DIR__)) . '/vendor',
@@ -9,7 +9,7 @@ $config = [
     'charset' 	  =>'utf-8', 
     'language'    =>'zh-CN',// 设置目标语言为中文
     'sourceLanguage'=>'en-US',// 设置源语言为英语
-    'defaultRoute'=>'site/index',
+    'defaultRoute'=>'home/index',
     //'catchAll'  =>['site/index'],
     'runtimePath' =>$runtimePath,
     'components'  =>[
@@ -18,7 +18,7 @@ $config = [
                         ],
             'i18n'=>[
                 'translations'=>[
-                                'app*'=>[
+                                'frontend*'=>[
                                         'class'         =>'yii\i18n\PhpMessageSource',
                                         'basePath'      =>'@app/../language',
                                         'sourceLanguage'=>'en-US',
@@ -27,8 +27,27 @@ $config = [
                                                             'app/error' =>'error.php'*/
                                                             ],
                                         ],
-                                    ],
-                                ],
+                                'backend*'=>[
+                                        'class'         =>'yii\i18n\PhpMessageSource',
+                                        'basePath'      =>'@app/../language',
+                                        'sourceLanguage'=>'en-US',
+                                        'fileMap'       =>[
+                                                            ],
+                                        ],
+                                'model*'=>[
+                                        'class'         =>'yii\i18n\PhpMessageSource',
+                                        'basePath'      =>'@app/../language',
+                                        'sourceLanguage'=>'en-US',
+                                        'fileMap'       =>[],
+                                        ],
+                                'form*'=>[
+                                        'class'         =>'yii\i18n\PhpMessageSource',
+                                        'basePath'      =>'@app/../language',
+                                        'sourceLanguage'=>'en-US',
+                                        'fileMap'       =>[],
+                                        ]
+                                ]
+                    ],
         'errorHandler'=>[
                         'errorAction'=>'errors/error',
                         ],

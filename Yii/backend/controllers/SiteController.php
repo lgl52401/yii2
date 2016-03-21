@@ -44,7 +44,7 @@ class SiteController extends Controller
     /**
      * @inheritdoc
      */
-    public function actions()
+    /*public function actions()
     {
         return [
             'error' => [
@@ -52,7 +52,7 @@ class SiteController extends Controller
             ],
         ];
     }
-
+*/
     public function actionIndex()
     {
         return $this->render('index');

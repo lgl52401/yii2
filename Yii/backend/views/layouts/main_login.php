@@ -14,7 +14,7 @@ AppAsset::register($this);
 <title><?php echo Html::encode($this->title) ?></title>
 <?php $this->head() ?>
 </head>
-<body>
+<body class="<?php if(isset($this->context->layout_data['cls']))echo $this->context->layout_data['cls'];?>">
 <?php $this->beginBody() ?>
 
 <div class="wrap">

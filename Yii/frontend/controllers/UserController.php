@@ -3,7 +3,7 @@ namespace frontend\controllers;
 
 use Yii;
 use app\models\User;
-use frontend\components\BaseFrontController;
+use app\components\BaseFrontController;
 
 class UserController extends BaseFrontController
 {

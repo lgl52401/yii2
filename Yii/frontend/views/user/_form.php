@@ -16,12 +16,12 @@ echo  $form->field($model,'username')->textInput(['placeholder'=>'只能由汉�
 <?= $form->field($model,'password')->passwordInput(['placeholder'=>'密码'])->label('密码')?>
 <?= $form->field($model,'password_rep')->passwordInput(['placeholder'=>'确认密码'])->label('确认密码')?>
 <?= $form->field($model,'email')->textInput(['placeholder'=>'邮箱'])->label('邮箱')?>
-<?php /*$form->field($model, 'verifyCode')->label('验证码')->widget(Captcha::className(), [
+<?=$form->field($model, 'verifyCode')->label('验证码')->widget(Captcha::className(), [
 'captchaAction'=>'tool/captcha',
 'options'=>['placeholder'=>'验证码'],
 'imageOptions'=>['alt'=>'点击换图','title'=>'点击换图', 'style'=>'cursor:pointer']
 
-]) */
+]) 
 ?>
 
 <!--<div class="input-group">

@@ -8,15 +8,6 @@ use yii\web\UploadedFile;
 
 class HomeController extends BaseFrontController
 {
-    public function actions()
-    {
-        return [
-            'Kupload' => [
-                'class' => 'pjkui\kindeditor\KindEditorAction',
-            ]
-        ];
-    }
-
     public function actionIndex()
     {
           

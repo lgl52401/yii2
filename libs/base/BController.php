@@ -11,7 +11,7 @@ class BController extends Controller
     public function init()
     {
         parent::init();
-        define('SYS_TIME', time());
+        if (!defined('SYS_TIME')) define('SYS_TIME', time());
     }
 
     /*
