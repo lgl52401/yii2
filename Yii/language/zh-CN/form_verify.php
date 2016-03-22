@@ -1,6 +1,6 @@
 <?php
 return [ 
-'form_validation_alpha_dash'=>'只能由汉字/数字/下划线组成，不能包含空格', 
+'form_validation_alpha_dash'=>'用户名由字母/数字/下划线组成,且不能以数字和下划线开头', 
 'Username'		=>'用户名', 
 'Password'		=>'用户密码',
 'Password_rep'	=>'确认密码',

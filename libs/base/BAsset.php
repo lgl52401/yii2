@@ -39,5 +39,18 @@ class BAsset extends AssetBundle
     public static function addCss($view, $cssfile)
     {  
         $view->registerCssFile($cssfile, [BAsset::className(), 'depends' => '']);  
-    }  
+    }
+
+    //加载原生态组件
+    public static function loadAsset($Asset='yii\bootstrap\BootstrapAsset',$css=['css/bootstrap.min.css'],$js=['js/bootstrap.min.js'])
+    {
+        $temp = [];
+        if($css)$temp['css'] = $css;
+        if($js)$temp['js']   = $js;
+        if($Asset && $temp)
+        {
+            \Yii::$app->assetManager->bundles[$Asset] = $temp;
+        }
+        
+    }
 }

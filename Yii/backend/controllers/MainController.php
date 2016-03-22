@@ -8,19 +8,20 @@ use app\components\BaseController;
 use app\models\Admin;
 
 /**
- * Login controller
+ * Main controller
  */
-class LoginController extends BaseController
+class MainController extends BaseController
 {
     public $layout      = 'main_login';
-    public $layout_data = ['cls'=>'login-content'];
+    public $layout_data = ['cls'=>'index-content'];
 
     /**
-    * 后台用户登录
+    * 后台用户主界面
     *
     */  
     public function actionIndex()
     {
+        return $this->render('index');
         $model = new Admin();
         if($model->checkLogin())
         {

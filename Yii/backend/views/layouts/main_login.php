@@ -25,9 +25,9 @@ AppAsset::register($this);
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
+        <p class="pull-left">Copyright © <?= date('Y') ?> 天宝旅游 All rights reserved.  </p>
 
-        <p class="pull-right"><?php echo Yii::powered() ?></p>
+        <p class="pull-right"></p>
     </div>
 </footer>
 

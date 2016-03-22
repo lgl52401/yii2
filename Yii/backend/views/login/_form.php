@@ -16,22 +16,20 @@ use yii\captcha\Captcha;
 				'template' => '<div class="field-flex">{label}{input}<div class="help-block">{error}</div></div>',
 				]
 	]); ?>
-<section>
+	<div class="formMsg"></div>
 	<?= $form->field($model,'username',['template' => '<i class="glyphicon glyphicon-user input-icons"></i>{input}<div class="help-block">{error}</div>'])->textInput(['placeholder'=>Yii::t('form_verify', 'form_validation_alpha_dash')])
 	?>
 	<?= $form->field($model,'password',['template' => '<i class="glyphicon glyphicon-lock input-icons"></i>{input}<div class="help-block">{error}</div>'])->passwordInput(['placeholder'=>Yii::t('form_label', 'Please input').Yii::t('form_label', 'Password')])?>
 	<?= $form->field($model, 'verifyCode')->widget(Captcha::className(), [
-	'captchaAction'=>'login/captcha',
+	'captchaAction'=>'tool/captcha',
 	'options'=>['placeholder'=>'','class' => 'form-control'],
 	'template' => '{input}{image}',
-	'imageOptions'=>['alt'=>Yii::t('form_label', 'ClickMap'),'title'=>Yii::t('form_label', 'ClickMap'), 'style'=>'cursor:pointer']
+	'imageOptions'=>['class'=>'verifycode','alt'=>Yii::t('form_label', 'ClickMap'),'title'=>Yii::t('form_label', 'ClickMap'), 'style'=>'cursor:pointer']
 	]) 
 	?>
 	<div class="form-group">
-	<?= Html::submitButton(Yii::t('form_label', 'Sign in'), ['class'=>'btn btn-danger pull-right btn-block _save','date-option'=>'login-form']) ?>
+	<?= Html::submitButton(Yii::t('form_label', 'Sign in').'&nbsp;&nbsp;<i class="glyphicon glyphicon-circle-arrow-right"></i>', ['class'=>'btn btn-danger pull-right btn-block _save','data-option'=>'login-form','data-refresh'=>'1']) ?>
 	</div>
-
-</section>
 <!-- <section class="log-in">
 	<?= Html::a('首页',null,['href'=>Url::toRoute('default/index'),'class'=>'btn btn-slategray']) ?>
 </section> -->

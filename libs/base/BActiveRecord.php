@@ -22,9 +22,10 @@ class BActiveRecord extends ActiveRecord
 	/*
 		统一输出结果
 	*/
-	public function outResult()
+	public function outResult($msg = '')
 	{
-		$result = ['success'=>false,'msg'=>'','data'=>'','ids'=>''];
+		$msg    = $msg ? $msg : Yii::t('model', 'verification failed');
+		$result = ['success'=>false,'msg'=>$msg,'data'=>'','ids'=>''];
 		return $result;
 	}
 
@@ -234,12 +235,12 @@ class BActiveRecord extends ActiveRecord
 		{
 			$dump = VarDumper::dumpAsString($this);
 			Yii::info($dump, '_form');
-			if(Yii::$app->request->isAjax)
+			/*if(Yii::$app->request->isAjax)
 			{
 				$ret = $this->outResult();
 				$ret['data'] = $errors;
 				exit(json_encode($ret));
-			}
+			}*/
 			return false;
 			//throw new NotFoundHttpException(json_encode($errors));
 		}

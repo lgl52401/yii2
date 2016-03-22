@@ -13,6 +13,8 @@ class HomeController extends BaseFrontController
           
     	//$follow= Route::find()->all();
     	$Route = new Route;
+        $a =Route::find()->limit(1)->one();
+        print_r($a);
         $s = $Route->get_defaultPage($Route->db->from($Route::tableName()),['pageSize'=>3]);
     	//$s = $Route->db->from($Route::tableName())->all();
     	//$s = Route::find()->joinWith('orders')->where([Route::tableName().'.route_id' => '1'])->all();
