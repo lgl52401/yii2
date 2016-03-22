@@ -23,21 +23,22 @@ class LoginController extends BaseController
 
     public function actionIndex()
     {
-        if (!Yii::$app->user->isGuest)
+        /*if (!Yii::$app->user->isGuest)
         {
             return $this->goHome();
-        }
-
+        }*/
         $model = new Admin();
         $model->scenario = 'index';
-
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
+        $data = Yii::$app->request->post();
+        if ($model->load($data) && $model->validate())
+        {
+           exit(json_encode([]));
+            die;
             return $this->goBack();
-        } else {
-            return $this->render('index', [
-                'model' => $model,
-                
-            ]);
+        } 
+        else 
+        {//exit(json_encode([]));
+            return $this->render('index', ['model' => $model]);
         }
     }
 

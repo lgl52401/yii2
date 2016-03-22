@@ -17,5 +17,6 @@ class AppAsset extends BAsset
     {
         parent::init();
         $this->css      = ['backend/css/main.css'];
+        $this->js       = ['backend/js/main.js'];
     }
 }

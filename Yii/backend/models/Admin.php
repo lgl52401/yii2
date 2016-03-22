@@ -39,7 +39,6 @@ class Admin extends \libs\base\BActiveRecord
 
                 [['username','password'],'required'],
 
-                
                 ['verifyCode', 'captcha','captchaAction'=>'login/captcha','on'=>'index'],
 
                 [['status'], 'integer'],

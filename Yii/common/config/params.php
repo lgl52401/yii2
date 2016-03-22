@@ -9,7 +9,7 @@ return [
 						'backColor'	=>0xFFFFFF,
 						'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
 						'transparent'=>true,
-						'maxLength'	=>5,  
+						'maxLength'	=>4,  
 						'minLength'	=>4, 
 						'width'		=>'80',
 						'height'	=>'36' 
