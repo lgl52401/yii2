@@ -67,8 +67,9 @@ body.index-content{overflow-y:hidden}
 #menu li ul ul{display: none; position: absolute;position: fixed;top: 44px;bottom:0px;width: 189px;box-shadow:0px 0px 10px rgba(0,0,0,.4);background-color:rgba(30,23,44,0.95);}
 
 #column-left .scroll{position:absolute; background-color:rgba(20,16,27,.8);bottom:0;display:none;left:0;overflow:hidden;width:100%}
-#column-left .scroll a{color:#fff;display:inline-block;padding:5px 0;text-align:center;width:49%;cursor: pointer;}
-#column-left .scroll a:hover{color:#e7cf04}
+#column-left .scroll a{color:#fff;display:inline-block;padding:5px 0;text-align:center;width:100%;cursor: pointer;float: left;}
+#column-left .scroll a:hover{color:#e7cf04;background-color:rgba(20,16,27,.9);}
+#column-left.active .scroll a{width: 50%}
 
 /*
 	弹出框css
