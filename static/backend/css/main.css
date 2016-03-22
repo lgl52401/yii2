@@ -7,7 +7,7 @@ body,html{height:100%}
 /*
 	登录页面
 */
-body.login{background:url(../images/login_bg.png) repeat}
+body.login-content{background:url(../images/login_bg.png) repeat}
 #login{}
 #login .logo{margin-left:0;min-width:210px;padding:20px;background: url(../images/login_logo.png) no-repeat center center;}
 #login .logo a{ display: block;width:188px; height: 50px; margin: 0 auto;}
@@ -16,8 +16,8 @@ body.login{background:url(../images/login_bg.png) repeat}
 .relative .input-icons{bottom:0;color:#909090;display:inline-block;font-size:14px;left:5px;line-height:35px;padding:0 3px;position:absolute;top:0;z-index:2}
 .relative input.form-control{padding-left: 26px}
 .relative .control-label{min-width:50px;line-height:30px}
-.field-flex{display: flex;}
 .relative .field-flex input.form-control{flex:1;min-width:80px;padding-left:12px}
+.field-flex{display: flex;}
 /*flex: 0 0 auto;*/
 /* .jumbotron{text-align:center;background-color:transparent}
 .jumbotron .btn{font-size:21px;padding:14px 24px}

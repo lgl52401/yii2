@@ -3,7 +3,6 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 use yii\captcha\Captcha; 
-use libs\libraries\JsBlock;
 ?>
 
 <?php $form = ActiveForm::begin([
@@ -29,40 +28,11 @@ use libs\libraries\JsBlock;
 	]) 
 	?>
 	<div class="form-group">
-	<?= Html::submitButton(Yii::t('form_label', 'Sign in'), ['class'=>'btn btn-danger pull-right btn-block','name' =>'submit-button']) ?>
+	<?= Html::submitButton(Yii::t('form_label', 'Sign in'), ['class'=>'btn btn-danger pull-right btn-block _save','date-option'=>'login-form']) ?>
 	</div>
-</section>
 
+</section>
 <!-- <section class="log-in">
 	<?= Html::a('首页',null,['href'=>Url::toRoute('default/index'),'class'=>'btn btn-slategray']) ?>
 </section> -->
-
-<?php JsBlock::begin() ?>
- <script>
-   $(function () {
-       jQuery('form#login-form').on('beforeSubmit', function (e) {
-       	if ($(this).find('.has-error').length) {
-        return false;
-    }
-alert(4)
-           var $form = $(this);
-           $.ajax({
-               url: $form.attr('action'),
-               type: 'post',
-               async: false,
-               data: $form.serialize(),
-               dataType:'json',
-               success: function (data) {//alert(data);$form.reset(); 
-                   // do something
-               },
-               error: function () {
-            alert("Something went wrong");
-        }
-           });
-       }).on('submit', function (e) {
-           e.preventDefault();
-       });
-       });
-</script>
-<?php JsBlock::end() ?>
 <?php ActiveForm::end(); ?>

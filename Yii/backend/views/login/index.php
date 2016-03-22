@@ -3,8 +3,8 @@
 		<a href=""></a>
 	</h1>
 	<div class="box-login">
-		<h3>登录到您的帐户</h3>
-		<p> 请输入用户名和密码进行登录 </p>
+		<h3><?= Yii::t('form_label', 'Sign in your account')?></h3>
+		<p> <?= Yii::t('form_label', 'Enter username and password')?> </p>
 		<?= $this->render('_form', ['model' => $model]) ?>
 	</div>
 </div>

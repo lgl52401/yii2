@@ -12,7 +12,7 @@ use app\models\Admin;
 class LoginController extends BaseController
 {
     public $layout = 'main_login';
-    public $layout_data = ['cls'=>'login'];
+    public $layout_data = ['cls'=>'login-content'];
 
     public function actions()
     {
