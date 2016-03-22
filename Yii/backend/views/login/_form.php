@@ -10,6 +10,7 @@ use libs\libraries\JsBlock;
 	'id'=>'login-form',
 	'action' => Url::to(['/login'],true),
 	'enableClientValidation' => true,
+	'enableAjaxValidation' => false,
 	'validateOnSubmit'=>true,
 	'fieldConfig'=>[
 				'options'  => ['tag' => 'div','class' => 'form-group relative'],
@@ -53,7 +54,10 @@ alert(4)
                dataType:'json',
                success: function (data) {//alert(data);$form.reset(); 
                    // do something
-               }
+               },
+               error: function () {
+            alert("Something went wrong");
+        }
            });
        }).on('submit', function (e) {
            e.preventDefault();
