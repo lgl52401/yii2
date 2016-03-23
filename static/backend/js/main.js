@@ -44,6 +44,9 @@ $(function(){
 	    {
 	        $(this).find('i').removeClass('fa-indent').addClass('fa-dedent');
 	        $('#column-left').addClass('active');
+	        $('.first_ul').slideUp(1);
+	        $('#menu>li:first>ul:first').slideDown(1);
+	        $('#menu>li:first>a:first').find('c').removeClass('fa-angle-up').addClass('fa-angle-down');
 	    }
 	})
 	$('#menu>li:first>ul:first').slideDown(1);
