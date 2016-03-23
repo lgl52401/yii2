@@ -71,83 +71,63 @@ use libs\libraries\JsBlock;
 			<small>Demonstration</small>
 		</div>
 	</div>
-	<ul id="menu">
-		<li id="dashboard" class="active">
-			<a ><i class="fa fa-dashboard fa-fw"></i><span>Dashboard</span><c class="fa fa-angle-up"></c></a>
-			<ul class="first_ul">
-				<li>
-					<a ><i class="fa fa-angle-double-right"></i><span>Categories</span><c class="fa fa-angle-right"></c></a>
-					<ul >
-						<li>
-							<a ><i class="fa fa-circle-thin"></i><span>Categories</span></a>
-						</li>
-						<li>
-							<a ><i class="fa fa-circle-thin"></i><span>Categories</span></a>
-						</li>
-						<li>
-							<a ><i class="fa fa-circle-thin"></i><span>Categories</span></a>
-						</li>
-					</ul>
-				</li>
-				<li>
-					<a ><i class="fa fa-angle-double-right"></i><span>Categories</span><c class="fa fa-angle-right"></c></a>
-					<ul >
-						<li>
-							<a ><i class="fa fa-circle-thin"></i><span>Categories</span></a>
-						</li>
-			
-					</ul>
-				</li>
-				<li>
-					<a ><i class="fa fa-angle-double-right"></i><span>Categories</span></a>
-				</li>
-			</ul>
-		</li>
-		<li>
-			<a ><i class="fa fa-dashboard fa-fw"></i><span>Dashboard</span><c class="fa fa-angle-up"></c></a>
-			<ul class="first_ul">
-				<li>
-					<a ><i class="fa fa-circle-thin"></i><span>Categories</span></a>
-				</li>
-				<li>
-					<a ><i class="fa fa-circle-thin"></i><span>Categories</span></a>
-				</li>
-				<li>
-					<a ><i class="fa fa-circle-thin"></i><span>Categories</span></a>
-				</li>
-			</ul>
-		</li>
-		<li>
-			<a ><i class="fa fa-dashboard fa-fw"></i><span>Dashboard</span><c class="fa fa-angle-up"></c></a>
-		</li>
-	</ul>
+	<div id="menu_box">
+		<ul id="menu">
+			<li>
+				<a ><i class="fa fa-dashboard fa-fw"></i><span>Dashboard</span><c class="fa fa-angle-up"></c></a>
+				<ul class="first_ul">
+					<li>
+						<a ><i class="fa fa-angle-double-right"></i><span>Categories</span><c class="fa fa-angle-right"></c></a>
+						<ul >
+							<li>
+								<a ><i class="fa fa-circle-thin"></i><span>Categories</span></a>
+							</li>
+							<li>
+								<a ><i class="fa fa-circle-thin"></i><span>Categories</span></a>
+							</li>
+							<li>
+								<a ><i class="fa fa-circle-thin"></i><span>Categories</span></a>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<a ><i class="fa fa-angle-double-right"></i><span>Categories</span><c class="fa fa-angle-right"></c></a>
+						<ul >
+							<li>
+								<a ><i class="fa fa-circle-thin"></i><span>Categories</span></a>
+							</li>
+				
+						</ul>
+					</li>
+					<li>
+						<a ><i class="fa fa-angle-double-right"></i><span>Categories</span></a>
+					</li>
+				</ul>
+			</li>
+			<li>
+				<a ><i class="fa fa-dashboard fa-fw"></i><span>Dashboard</span><c class="fa fa-angle-up"></c></a>
+				<ul class="first_ul">
+					<li>
+						<a ><i class="fa fa-circle-thin"></i><span>Categories</span></a>
+					</li>
+					<li>
+						<a ><i class="fa fa-circle-thin"></i><span>Categories</span></a>
+					</li>
+					<li>
+						<a ><i class="fa fa-circle-thin"></i><span>Categories</span></a>
+					</li>
+				</ul>
+			</li>
+			<li>
+				<a ><i class="fa fa-dashboard fa-fw"></i><span>Dashboard</span><c class="fa fa-angle-up"></c></a>
+			</li>
+		</ul>
+	</div>
 	<div class="scroll" style="display:block" >
-        <a onclick="menuScroll(1);"  class="per" ><i class="fa fa-chevron-up"></i></a>
+        <a onclick="javascript:menuScroll(1);"  class="per" ><i class="fa fa-chevron-up"></i></a>
         <a onclick="menuScroll(2);"  class="next" ><i class="fa fa-chevron-down"></i></a>
     </div>
 </nav>
-
 <?php JsBlock::begin() ?>
-<script>
-$('#button-menu').click(function(){
-    if($(this).find('i').hasClass('fa-dedent'))
-    {
-        $(this).find('i').removeClass('fa-dedent').addClass('fa-indent');
-        $('#column-left').removeClass('active');
-    }
-    else
-    {
-        $(this).find('i').removeClass('fa-indent').addClass('fa-dedent');
-        $('#column-left').addClass('active');
-    }
-})
-$('#menu>li:first>ul:first').slideDown();
-$('#menu>li:first>ul:first').prev('a').find('c').removeClass('fa-angle-up').addClass('fa-angle-down');
-$('#menu>li').click(function(){
-	$('.first_ul').slideUp();
-	$('.first_ul').prev('a').find('c').removeClass('fa-angle-down').addClass('fa-angle-up');
-	$(this).find('>ul').slideDown();
-	$(this).find('>ul').prev('a').find('c').removeClass('fa-angle-up').addClass('fa-angle-down');
-})
-</script>
+<?php $this->registerJsFile(staticDir.'/backend/js/main.js');?>
 <?php JsBlock::end() ?>

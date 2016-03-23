@@ -22,25 +22,26 @@ body.login-content{background:url(../images/login_bg.png) repeat}
 
 
 body.index-content{overflow-y:hidden}
-#header{background:#2B233B;border-bottom:#20192c 1px solid;min-height:0;margin:0px}
-#header #button-menu{border-right:1px solid #473b5d;color:#fff;cursor:pointer;line-height:25px;padding:10px 17px 9px}
+#header{background:#2B233B;border-bottom:#20192c 1px solid;min-height:0;margin:0px;box-shadow:0px 2px 3px rgba(0, 0, 0, 0.2);}
+#header #button-menu{border-right:1px solid #473b5d;color:#fff;cursor:pointer;line-height:25px;padding:10px 15px 10px 15px}
 #header .navbar-brand{height:44px;width: 141px;display: block; margin-right:10px;padding:10px;background:url(../images/logo.png) no-repeat center center;}
 #header .nav > li {float: left;}
-#header .nav>li>a{border-left:1px solid #473b5d;color:#cce2ff;cursor:pointer;line-height:38px;padding:3px 16px}
-#header .nav > li > a:hover, #header .nav > li > a:focus{background:#3c3251;color: #e7cf04}
+#header .nav>li>a{border-left:1px solid #473b5d;color:#fff;cursor:pointer;line-height:38px;padding:3px 16px}
+#header .nav .open > a,#header .nav .open > a:focus,#header .nav .open > a:hover{background:#1B1429;}
+#header .nav > li > a:hover, #header .nav > li > a:focus{background:#1B1429;color: #e7cf04}
 #header .nav > li li{min-width:200px}
-
 
 #column-left{box-shadow:3px -1px 4px rgba(0, 0, 0, 0.2);background:#342b47;height:100%;padding-top:44px;position:absolute;top:0;transition:all .1s ease 0s;width:50px;z-index:10}
 #column-left.active{width: 200px;}
-#column-left.active #profile{border-bottom:1px solid #4f4367;display:block;overflow:auto;padding:10px 15px}
+#column-left.active #profile{background:#342b47;z-index: 1; position: relative;border-bottom:1px solid #4f4367;display:block;overflow:auto;padding:10px 15px}
 #column-left #profile div {color: #c4c4c4;float: left;}
 #column-left #profile h4{color:#fff;font-family:"Open Sans",sans-serif;font-size:15px;font-weight:400;margin-bottom:0;margin-top:6px}
 #profile {display: none;}
 
-#column-left #menu {margin-bottom: 25px;}
+#column-left #menu {margin-bottom: 25px;width: 100%;position: absolute;}
 #column-left.active #menu > li > a > span{display: inline;}
 #menu,#menu li,#menu ul{list-style:outside none none;margin:0;padding:0}
+#menu_box{position: relative;z-index: 0}
 #menu > li{position: relative;}
 #menu li a{border-bottom:1px solid #130f1d;cursor:pointer;display:block;padding:10px;text-decoration:none}
 #menu>li>a{border-bottom:#20192c 1px dashed;color:#c4c4c4;font-size:14px;padding-left:13px}
