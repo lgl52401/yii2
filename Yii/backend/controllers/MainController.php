@@ -21,7 +21,10 @@ class MainController extends BaseController
     */  
     public function actionIndex()
     {
-        return $this->render('index');
+        //print_r(Yii::$app->params);die;
+       /* $cookies      = Yii::$app->request->cookies;
+        $cookie_lang = $cookies->getValue('sssssss','zzz');*/
+        return $this->render('index',['langList'=>Yii::$app->params['lang_backend']]);
         $model = new Admin();
         if($model->checkLogin())
         {

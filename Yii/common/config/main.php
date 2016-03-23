@@ -45,7 +45,13 @@ $config = [
                                         'basePath'      =>'@app/../language',
                                         'sourceLanguage'=>'en-US',
                                         'fileMap'       =>[],
-                                        ]
+                                        ],
+                                'html*'=>[
+                                        'class'         =>'yii\i18n\PhpMessageSource',
+                                        'basePath'      =>'@app/../language',
+                                        'sourceLanguage'=>'en-US',
+                                        'fileMap'       =>[],
+                                        ]        
                                 ]
                     ],
         'errorHandler'=>[

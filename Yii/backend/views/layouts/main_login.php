@@ -22,13 +22,13 @@ AppAsset::register($this);
 
 <div class="wrap">
     <div class="container">
-        <?php echo $content ?>
+        <?php echo $content;?>
     </div>
 </div>
 
-<?php if (isset($this->blocks['footer'])): ?>
+<?php if (isset($this->blocks['footer'])){ ?>
     <?= $this->blocks['footer'] ?>
-<?php endif; ?>
+<?php } ?>
 
 
 <?php $this->endBody() ?>
