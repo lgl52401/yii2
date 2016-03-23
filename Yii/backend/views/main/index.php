@@ -1,5 +1,6 @@
 <?php
-use libs\libraries\JsBlock;
+use app\assets\AppAsset;
+use yii\helpers\Html;
 ?>
 <header id="header" class="navbar navbar-static-top" >
 	<div class="navbar-header">
@@ -123,11 +124,13 @@ use libs\libraries\JsBlock;
 			</li>
 		</ul>
 	</div>
-	<div class="scroll" style="display:block" >
+	<div class="scroll" >
         <a onclick="javascript:menuScroll(1);"  class="per" ><i class="fa fa-chevron-up"></i></a>
         <a onclick="menuScroll(2);"  class="next" ><i class="fa fa-chevron-down"></i></a>
     </div>
 </nav>
-<?php JsBlock::begin() ?>
-<?php $this->registerJsFile(staticDir.'/backend/js/main.js');?>
-<?php JsBlock::end() ?>
+
+
+<?php $this->beginBlock('js'); ?>
+<?=Html::jsFile(staticDir.'/backend/js/main.js')?>
+<?php $this->endBlock(); ?>

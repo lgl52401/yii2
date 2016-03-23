@@ -8,3 +8,13 @@
 		<?= $this->render('_form', ['model' => $model]) ?>
 	</div>
 </div>
+
+<?php $this->beginBlock('footer'); ?>
+<footer class="footer">
+    <div class="container">
+        <p class="pull-left">Copyright © <?= date('Y') ?> 天宝旅游 All rights reserved.  </p>
+
+        <p class="pull-right"></p>
+    </div>
+</footer>
+<?php $this->endBlock(); ?>

@@ -31,14 +31,14 @@ class BAsset extends AssetBundle
 
     //定义按需加载JS方法，注意加载顺序在最后  
     public static function addScript($view, $jsfile)
-    {  
-        $view->registerJsFile($jsfile, [BAsset::className(), 'depends' => '']);  
+    {
+        $view->registerJsFile($jsfile, [BAsset::className(), 'depends' => ['libs\base\BAsset']]);  
     }  
       
    //定义按需加载css方法，注意加载顺序在最后  
     public static function addCss($view, $cssfile)
     {  
-        $view->registerCssFile($cssfile, [BAsset::className(), 'depends' => '']);  
+        $view->registerCssFile($cssfile, [BAsset::className(), 'depends' => 'libs\base\BAsset']);  
     }
 
     //加载原生态组件

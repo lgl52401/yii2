@@ -13,6 +13,9 @@ AppAsset::register($this);
 <?php echo Html::csrfMetaTags() ?>
 <title><?php echo Html::encode($this->title) ?></title>
 <?php $this->head() ?>
+<?php if (isset($this->blocks['css'])): ?>
+    <?= $this->blocks['css'] ?>
+<?php endif; ?>
 </head>
 <body class="<?php if(isset($this->context->layout_data['cls']))echo $this->context->layout_data['cls'];?>">
 <?php $this->beginBody() ?>
@@ -23,15 +26,15 @@ AppAsset::register($this);
     </div>
 </div>
 
-<footer class="footer">
-    <div class="container">
-        <p class="pull-left">Copyright © <?= date('Y') ?> 天宝旅游 All rights reserved.  </p>
+<?php if (isset($this->blocks['footer'])): ?>
+    <?= $this->blocks['footer'] ?>
+<?php endif; ?>
 
-        <p class="pull-right"></p>
-    </div>
-</footer>
 
 <?php $this->endBody() ?>
+<?php if (isset($this->blocks['js'])): ?>
+    <?= $this->blocks['js'] ?>
+<?php endif; ?>
 </body>
 </html>
 <?php $this->endPage() ?>

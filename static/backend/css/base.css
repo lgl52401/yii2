@@ -21,10 +21,13 @@ body.login-content{background:url(../images/login_bg.png) repeat}
 .field-flex{display: flex;}
 
 
-body.index-content{overflow-y:hidden}
-#header{background:#2B233B;border-bottom:#20192c 1px solid;min-height:0;margin:0px;box-shadow:0px 2px 3px rgba(0, 0, 0, 0.2);}
+
+body.index-content{overflow-y:hidden;}
+body.index-content a{outline:none;blr:expression(this.onFocus=this.blur());}
+#header{background:#2B233B;border-bottom:#20192c 1px solid;min-height:0;max-height: 45px; margin:0px;box-shadow:0px 2px 3px rgba(0, 0, 0, 0.2);}
 #header #button-menu{border-right:1px solid #473b5d;color:#fff;cursor:pointer;line-height:25px;padding:10px 15px 10px 15px}
 #header .navbar-brand{height:44px;width: 141px;display: block; margin-right:10px;padding:10px;background:url(../images/logo.png) no-repeat center center;}
+#header .navbar-header{max-width:201px}
 #header .nav > li {float: left;}
 #header .nav>li>a{border-left:1px solid #473b5d;color:#fff;cursor:pointer;line-height:38px;padding:3px 16px}
 #header .nav .open > a,#header .nav .open > a:focus,#header .nav .open > a:hover{background:#1B1429;}
@@ -67,7 +70,7 @@ body.index-content{overflow-y:hidden}
 .active #menu li ul li:hover ul{left:200px;}
 #menu li ul ul{display: none; position: absolute;position: fixed;top: 44px;bottom:0px;width: 189px;box-shadow:0px 0px 10px rgba(0,0,0,.4);background-color:rgba(30,23,44,0.95);}
 
-#column-left .scroll{position:absolute; background-color:rgba(20,16,27,.8);bottom:0;display:none;left:0;overflow:hidden;width:100%}
+#column-left .scroll{display: none; position:absolute; background-color:rgba(20,16,27,.8);bottom:0;display:none;left:0;overflow:hidden;width:100%}
 #column-left .scroll a{color:#fff;display:inline-block;padding:5px 0;text-align:center;width:100%;cursor: pointer;float: left;}
 #column-left .scroll a:hover{color:#e7cf04;background-color:rgba(20,16,27,.9);}
 #column-left.active .scroll a{width: 50%}
