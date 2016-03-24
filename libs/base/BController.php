@@ -28,7 +28,7 @@ class BController extends Controller
     * 在具体的动作执行之前会先执行beforeAction，如果返回false,则动作将不会被执行，
     * 后面的afterAction也不会执行（但父模块跌afterAction会执行）
     */
-    public function beforeAction($action)
+    public function beforeExt()
     {
         $schema = strip_tags(Yii::$app->request->get('schema'));
         if($schema)
