@@ -46,6 +46,10 @@ class BaseController extends BController
 						]));
         		$lang_now = $lang_default;
         	}
+            else
+            {
+                $lang_now = $lang_now->value;
+            }    
         }
         \Yii::$app->language = $lang_now;
         return true;//如果返回值为false,则action不会运行
