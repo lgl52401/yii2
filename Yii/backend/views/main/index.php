@@ -21,7 +21,7 @@ use yii\helpers\url;
 
 	<ul class="nav pull-right">
 		<li>
-			<a data-href="http://www.tianbaotravel.com/admin/1.main.php">
+			<a data-href="http://www.baidu.com">
 				<i class="fa fa-home fa-lg"></i>
 			</a>
 		</li>
@@ -161,7 +161,7 @@ use yii\helpers\url;
 </nav>
 
 <div id="content">
-	<iframe src='http://www.tianbaotravel.com/admin/1.main.php' id="rightMain"  frameborder="false" scrolling="auto" width="100%" height="auto" allowtransparency="true"></iframe>
+	<iframe src='' id="rightMain"  frameborder="false" scrolling="auto" width="100%" height="auto" allowtransparency="true"></iframe>
 </div>
 
 <?php $this->beginBlock('js'); ?>
