@@ -17,7 +17,7 @@ class AppAsset extends BAsset
     {
         parent::init();
         parent::loadAsset();
-        $this->css      = ['backend/css/base.css','plug/font-awesome/css/font-awesome.min.css'];
-        $this->js       = ['backend/js/base.js'];
+        $this->css      = ['backend/css/base.css','plug/font-awesome/css/font-awesome.min.css','plug/wesley/wesleyPlug.css'];
+        $this->js       = ['backend/js/base.js','plug/wesley/wesleyPlug.js'];
     }
 }

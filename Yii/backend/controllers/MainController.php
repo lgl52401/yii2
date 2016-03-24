@@ -2,15 +2,14 @@
 namespace backend\controllers;
 
 use Yii;
-use yii\web\Controller;
 use yii\helpers\Url;
-use app\components\BaseController;
+use app\components\AdminController;
 use app\models\Admin;
 
 /**
  * Main controller
  */
-class MainController extends BaseController
+class MainController extends AdminController
 {
     public $layout      = 'main_login';
     public $layout_data = ['cls'=>'index-content'];
@@ -48,10 +47,11 @@ class MainController extends BaseController
     * 后台用户退出
     *
     */
-    public function actionLogout()
+    public function actionAccount()
     {
-        $model = new Admin();
-        $model->logout();
-        return $this->redirect(Url::to(['/login'],true));
+        $this->layout = 'main_dialog';
+        $model = new Admin();//Partial
+        $content  = $this->renderPartial('account',['model' => $model]);
+        return $this->renderAjax('../layouts/main_dialog',['content' => $content],'index');
     }
 }

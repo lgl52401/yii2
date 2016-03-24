@@ -30,17 +30,24 @@ use yii\helpers\url;
 				<i class="fa fa-refresh fa-lg"></i>
 			</a>
 		</li>
+		<li>
+			<a class="_loadModel" data-url="<?= Url::to(['main/account'],true)?>">
+				<i class="fa fa-user fa-lg"></i>
+				<?php echo Yii::t('backend_html', 'Account Settings');?>
+			</a>
+		</li>
+		
 		<li class="dropdown">
 			<a data-toggle="dropdown" class="dropdown-toggle">
 				<i class="fa fa-language fa-lg"></i>
-				<?php echo Yii::t('html', Yii::$app->language);?>
+				<?php echo Yii::t('backend_html', Yii::$app->language);?>
 				<span class="caret"></span>
 			</a>
 			<ul class="dropdown-menu dropdown-menu-right alerts-dropdown">
 				<?php foreach ($langList as $key => $val){?>
 		        <li>
 		        	<a href="<?= Url::to(['main/','s_lang'=>$key],true)?>">
-		        		<img src="<?php echo staticDir.'/icon/'.$key.'.png';?>">&nbsp;&nbsp;<?php echo Yii::t('html', $key);?>
+		        		<img src="<?php echo staticDir.'/icon/'.$key.'.png';?>">&nbsp;&nbsp;<?php echo Yii::t('backend_html', $key);?>
 			        </a>
 			    </li>
 		    	<?php }?>
@@ -87,7 +94,7 @@ use yii\helpers\url;
 
 		<li>
 			<a href="<?= Url::to(['login/logout'],true)?>">
-				<span class="hidden-xs hidden-sm hidden-md"><?php echo Yii::t('html','Logout');?></span> 
+				<span class="hidden-xs hidden-sm hidden-md"><?php echo Yii::t('backend_html','Logout');?></span> 
 				<i class="fa fa-sign-out fa-lg"></i>
 			</a>
 		</li>
@@ -170,4 +177,7 @@ use yii\helpers\url;
 
 <?php $this->beginBlock('js'); ?>
 <?=Html::jsFile(staticDir.'/backend/js/main.js')?>
+<script type="text/javascript" src="http://static.e.com/assets/1844acfb/yii.validation.js"></script>
+<script type="text/javascript" src="http://static.e.com/assets/1844acfb/yii.activeForm.js"></script>
+
 <?php $this->endBlock(); ?>

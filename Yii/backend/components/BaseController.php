@@ -18,40 +18,44 @@ class BaseController extends BController
     */
     public function beforeAction($action)
     {
-    	$this->beforeExt();
-    	$cookies 	  = Yii::$app->request->cookies;
-    	$scookies 	  = Yii::$app->response->cookies;
-    	$lang_support = Yii::$app->params['lang_backend'];
-    	$lang_default = Yii::$app->params['lang_default'];
-    	$lang_now 	  = '';
+    	$this->auto_lang();
+        return true;//如果返回值为false,则action不会运行
+    }
+
+    public function auto_lang()
+    {
+        $cookies      = Yii::$app->request->cookies;
+        $scookies     = Yii::$app->response->cookies;
+        $lang_support = Yii::$app->params['lang_backend'];
+        $lang_default = Yii::$app->params['lang_default'];
+        $lang_now     = '';
         $lang         = Yii::$app->request->get('s_lang');
         $cookie_name  = 's_lang';
         $exprie       = 2592000;//一个月
         if($lang && isset($lang_support[$lang]))
         {
-        	$scookies->add(new \yii\web\Cookie([
-					    'name'  =>$cookie_name,
-					    'value' =>$lang
-						]));
-        	$lang_now = $lang;
+            $scookies->add(new \yii\web\Cookie([
+                        'name'  =>$cookie_name,
+                        'value' =>$lang
+                        ]));
+            $lang_now = $lang;
         }
         else
         {
-        	$lang_now = $cookies->get($cookie_name);
-        	if(!$lang_now || !isset($lang_support[$lang_now->value]))
-        	{
-        		$scookies->add(new \yii\web\Cookie([
-						    'name'  =>$cookie_name,
-						    'value' =>$lang_default
-						]));
-        		$lang_now = $lang_default;
-        	}
+            $lang_now = $cookies->get($cookie_name);
+            if(!$lang_now || !isset($lang_support[$lang_now->value]))
+            {
+                $scookies->add(new \yii\web\Cookie([
+                            'name'  =>$cookie_name,
+                            'value' =>$lang_default
+                        ]));
+                $lang_now = $lang_default;
+            }
             else
             {
                 $lang_now = $lang_now->value;
             }    
         }
         \Yii::$app->language = $lang_now;
-        return true;//如果返回值为false,则action不会运行
     }
 }
