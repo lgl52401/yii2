@@ -24,7 +24,7 @@ class LoginController extends BaseController
         $model = new Admin();
         if($model->checkLogin())
         {
-            return $this->redirect(Url::to(['main/index'],true));
+            return $this->redirect(Url::to(['main/'],true));
         }
         
         $model->scenario = 'index';
