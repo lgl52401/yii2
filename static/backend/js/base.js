@@ -1,7 +1,20 @@
+function _try_return(data)
+{ 
+    try
+    {
+        var datas = eval('(' + data + ')');  // change the JSON string to javascript object   
+        return datas;
+    }
+    catch (e)
+    {
+        return false;
+    } 
+}
+
 function _ajax_data($form,$btn)
 {
-	var style = $btn.attr('data-style');
-	var msg   = $form.find('.formMsg:first').length;
+	var style    = $btn.attr('data-style');
+	var $formMsg = $form.find('.formMsg:first');
 	var tun   = 0;
 	$.ajax({
 		type: 'POST',
@@ -13,16 +26,21 @@ function _ajax_data($form,$btn)
 			if(ret.success)
 			{
 				tun = ret.data ? ret.data : -1;
-				if(msg)$form.find('.formMsg:first').html('<div class="alert alert-success alert-dismissible" ><button class="close" type="button" ><i class="fa fa-check"></i></button><strong>'+ret.msg+'</strong></div>');
+				if($formMsg.length)
+                {
+                    $formMsg.html('<div class="alert alert-success"> <i class="fa fa-check-circle"></i> <strong>'+ret.msg+'</strong><button type="button" data-dismiss="alert" class="close">×</button></div>');
+                    $formMsg.find('.alert').fadeIn();
+                }
                 if($btn.attr('data-refresh'))window.location.reload(true);
 			}
 			else
 			{
 				var verifycode = $form.find('.verifycode:first');
 				if(verifycode.length)verifycode.click();
-				if(msg)
+				if($formMsg.length)
 				{
-					if(msg)$form.find('.formMsg:first').html('<div class="alert alert-danger alert-dismissible" ><button class="close" type="button" ><i class="fa fa-close"></i></button><strong>'+ret.msg+'</strong></div>');
+					$formMsg.html('<div class="alert alert-danger"> <i class="fa fa-exclamation-circle"></i> <strong>'+ret.msg+'</strong><button type="button" data-dismiss="alert" class="close">×</button></div>');
+                    $formMsg.find('.alert').fadeIn();
 				}
 				else
 				{
@@ -36,6 +54,46 @@ function _ajax_data($form,$btn)
 		}
 	});
 	return tun;
+}
+
+function _ajax_html(url,temp,div_id)
+{
+    $('#'+div_id).remove();
+    $('.modal-backdrop').remove();
+    $('.ajax-loading').show();
+    if(!$('#'+div_id).length)
+    {
+        var tun = 0;
+        $.ajax({
+        type: 'POST',
+        url : url,
+        async: false,
+        data: temp,
+        success: function (json)
+        {
+            var i = json.indexOf('{"success":false,"msg":') 
+            if(i >= 0)
+            {
+                ta = _try_return(json);      
+                $.dialog.alert(ta.msg);
+                tun = 0;
+            }
+            else
+            {
+                $('body').append(json);
+                tun = 1;
+            } 
+        },
+       error: function () {
+            $.dialog.alert('系统错误');
+        }
+        });
+        $obj = $('#getModal .modal-dialog');
+        $obj.css({'margin-left':'-'+$obj.width()/2+'px','margin-top':'-'+$obj.height()/2+'px'});
+        $('.ajax-loading').hide();
+        return tun;
+    }
+    $('.ajax-loading').hide();
 }
 
 function ajax_submit(form,$btn)
@@ -56,219 +114,50 @@ function ajax_submit(form,$btn)
 }
 
 $(function(){
+    $('body').append('<div class="ajax-loading"><div><p></p></div></div><div class="_ajaxData"></div><a id="_hiddenBtn" style="display:none" class="btn btn-primary"  data-backdrop="static"  data-target="#getModal" data-toggle="modal" ></a>');
+
+    /*
+        动态提交数据
+    */
 	$(document).on('click','._save',function(event){
 		var form = jQuery('form#'+$(this).attr('data-option'));
 		var $btn = $(this);
 		if (form.find('.has-error').length)return false;
 		ajax_submit(form,$btn);
 	})
-});
 
-jQuery.dialog = {          
-    alert:function(param,callback)
-    {   
-        param.type = 1;
-        $.dialog.init(param,callback);
-    },          
-    confirm:function(param,callback)
-    {          
-        param.type = 2;
-        $.dialog.init(param,callback);
-    },
-    prompt:function(param,callback)
-    {          
-        param.type = 3;
-        $.dialog.init(param,callback);
-    },
-    loading:function(param,callback)
-    {          
-        param.type = 4;
-        $.dialog.init(param,callback);
-    },
-    actions:function(param,callback)
-    {          
-        var defaults = {msg:'标题',content:'-'};
-             options = $.extend(defaults,param);
-             obj     = $('#'+options.obj.attr('data-id'));
-             if(!obj.length)
-             {
-                $.dialog.dark({'msg':'缺少对象'});
-                return false;
-             }
-        var str  = '';
-            str += '<div class="modal-actions">';
-            str += '<div class="modal-actions-group">';
-            str += obj.html();
-            str += '</div>';
-            str += '<div class="modal-actions-group">';
-            str += '<button class="button-secondary pure-button button-block modal-actions-cancel">取消</button>';
-            str += '</div>';
-            str += '</div>';
-        var overlay = $("<div id='lean_overlay' class='ui-mask'></div>");
-        if(!document.getElementById('lean_overlay')){$('body').append(overlay);}
-        $('#lean_overlay').fadeIn(200);
-        $('body').append(str);
-        $('.modal-actions .list').css({'max-height':$('body').height()/2});
-        $('.modal-actions').animate({height: 'toggle'}, 500);
-        $('.modal-actions-cancel').click(function(){
-            $('#lean_overlay').fadeOut();
-            $('.modal-actions').slideUp(500,function(){$('.modal-actions').remove();});
-        })
-    },
-    dark:function(param,callback)
-    {
-        var defaults  = {msg:'标题',time:'3'};
-             options  = $.extend(defaults,param);
-             var str  = '<div class="modal-dark">';
-                 str += '<p>';
-                 str += options.msg;
-                 str += '</p>';
-                 str += '</div>';
-        function inters()
+    /*
+        动态加载数据
+    */
+    $(document).on('click','._loadModel',function(event){
+        var url     = $(this).attr('data-url');
+        var parame  = $(this).attr('data-parame');
+            parame  = parame ? parame : '';
+        if(!url)
         {
-            $('.modal-dark').fadeOut('slow',function(){$('.modal-dark').remove();});
-            clearTimeout(window.clear_interrs);
+            $.dialog.alert({'msg':'url丢失'});
+            return false;
         }
-        if(window.clear_interrs) clearTimeout(window.clear_interrs);
-        $('.modal-dark').remove();
-        $('body').append(str);
-        w = $('.modal-dark').outerWidth() / 2;
-        h = $('.modal-dark').outerHeight() / 2;
-        $('.modal-dark').css({'margin-left': '-'+w+'px','margin-top': '-'+h+'px'});
-        $('.modal-dark').fadeIn('slow');
-        if(options.time)
+        ret = _ajax_html(url,parame,'getModal');
+        if(ret)
         {
-            window.clear_interrs = setTimeout(inters,options.time * 1000);
+            $.dragInit({trigger:'.modal-content',handle:'#_modal-header'});
+            setTimeout(function(){$('#_hiddenBtn').click();},20)
         }
-    },
-    popup:function(param,callback)
-    {
-        var defaults = {msg:'标题',obj:''};
-             options = $.extend(defaults,param);
-             obj     = $('#'+options.obj.attr('data-id'));
-             if(!obj.length)
-             {
-                $.dialog.dark({'msg':'缺少对象'});
-                return false;
-             }
-        var str  = '<div class="modal-popup">';
-            str += '<div class="popup-inner">';
-            str += '<div class="popup-header">';
-            str += '<h4 class="popup-title">'+options.msg+'</h4>';
-            str += '<i class="fa fa-close popup-close"></i>';
-            str += '</div>';
-            str += '<div class="popup-body">';
-            str += obj.html();
-            str += '</div>';
-            str += '</div>';
-            str += '</div>';
-        $('.modal-popup').remove();
-        $('body').append(str);
-        $('.popup-close').click(function(){
-            h = $('.modal-popup').height();
-            $('.modal-popup').animate({top: h+'px'}, 400,function(){$('.modal-popup').remove();});
-        })
-        $('.modal-popup').animate({top: '0px'}, 400);    
-    },
-    notifi:function(param,callback)
-    {   
-        var defaults = {msg:'-',info:'系统提示',time:'5'};
-             options = $.extend(defaults,param);     
-        var str  = '<div class="notification" style="display:none">';
-            str += '<div class="notification-content">';
-            str += '<h3 class="notification-title"><i class="fa fa-commenting-o fa-yellow"></i> '+options.info+'</h3>';
-            str += '<span>'+options.msg+'</span>';
-            str += '</div>';
-            str += '<i class="fa fa-close notification-close"></i>';
-            str += '</div>';
-        function ints()
+    })
+    /*
+        关闭弹出框
+    */
+    $(document).on('click','._closeModel',function(){
+        if($(this).attr('data-reload'))
         {
-            $('.notification').animate({height: 'toggle', opacity: 'toggle'}, 200,function(){$('.notification').remove();});
-            clearTimeout(window.clear_ints);
-        }
-        if(window.clear_ints) clearTimeout(window.clear_ints);
-        $('.notification').remove();
-        $('body').append(str);
-        $('.notification').animate({height: 'toggle', opacity: 'toggle'}, 200);
-
-        if(options.time)
-        {
-            window.clear_ints = setTimeout(ints,options.time * 1000);
-        }
-
-        $('.notification-close').click(function(){
-            ints();
-        })
-    },
-    init:function(options,callback)
-    {
-        var defaults = {msg:'-',closeButton:null,info:'系统提示',placeholder:'','close':''};
-             options = $.extend(defaults,options);
-             style   = '';
-        if(options.type == 4) style = 'style="border:0px"';
-        var str  = '<div class="ui-dialog" >';
-            str += '<div class="ui-dialog-title">';
-            if(options.close)
-            {
-                str += '<a class="ui-dialog-close">';
-                str += '<i class="fa fa-close fa-lg"></i>';
-                str += '</a>';
-            }
-            str += '<h3>'+options.info+'</h3>';
-            str += '</div>';
-            str += '<div class="ui-dialog-content" '+style+'>';
-            str += '<div class="vote-dialog" >';
-            if(options.type == 4)
-            {
-                str += '<div class="loader-bounce1"></div><div class="loader-bounce2"></div><div ></div>';
-            }
-            else
-            {
-                str += '<p>'+options.msg+'</p>';
-            }
-
-            if(options.type == 3)
-            {
-                str += '<input class="prompt-input" type="text" placeholder="'+options.placeholder+'">';
-            }
-            str += '</div>';
-            str += '</div>';
-            str += '<div class="ui-dialog-btns" >';
-            if(options.type == 2 || options.type == 3)
-            {
-                str += '<a class="ui-btn ui-btn-1">取消</a>';
-            }
-            if(options.type != 4) str += '<a class="ui-btn ui-btn-2">确定</a>';
-            str += '</div>';
-            str += '</div>'; 
-        $('.ui-dialog').remove();
-        var overlay = $("<div id='lean_overlay' class='ui-mask'></div>");
-        if(!document.getElementById('lean_overlay')){$('body').append(overlay);}
-        $('body').append(str);
-        if(options.type == 4)
-        {
-            $('#lean_overlay').fadeIn(1);$('.ui-dialog').fadeIn(1);
+            window.location.reload();
         }
         else
         {
-            $('#lean_overlay').fadeIn(200);$('.ui-dialog').fadeIn('fast');
-        }    
-        $('.ui-btn-2,.ui-btn-1,.ui-dialog-close').click(function(){
-            $('.ui-dialog').fadeOut('fast',function(){$('.ui-dialog').remove();$('#lean_overlay').fadeOut();});
-            if(options.type == 4)return false;
-            if(options.type == 2 && $(this).hasClass('ui-btn-2'))
-            {
-                if(callback)callback();
-            }
-            else if(options.type == 3 && $(this).hasClass('ui-btn-2'))
-            {
-                val = $.trim($('.ui-dialog .prompt-input:first').val());
-                if(val && callback)
-                {
-                    callback(val);
-                }
-            }
-            return false;
-        })
-    }
-};
+            $('#_hiddenBtn').click();
+            setTimeout(function(){$('#getModal').remove();
+            $('.modal-backdrop').remove();},500);
+        }
+    }) 
+});

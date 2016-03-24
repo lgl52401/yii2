@@ -6,9 +6,9 @@ use yii\helpers\url;
 <header id="header" class="navbar navbar-static-top" >
 	<div class="navbar-header pull-left">
 		<a id="button-menu" class="pull-left" type="button">
-			<i class="fa fa-dedent fa-lg"></i>
+			<i class="fa fa-indent fa-lg"></i>
 		</a>
-		<a class="navbar-brand" href="">
+		<a class="navbar-brand" href="<?= Url::to(['main/'],true)?>">
 		</a>
 	</div>
 	
@@ -30,15 +30,26 @@ use yii\helpers\url;
 				<i class="fa fa-refresh fa-lg"></i>
 			</a>
 		</li>
+		<li>
+			<a class="_loadModel" data-url="<?= Url::to(['main/account'],true)?>">
+				<i class="fa fa-user fa-lg"></i>
+				<?php echo Yii::t('backend_html', 'Account Settings');?>
+			</a>
+		</li>
+		
 		<li class="dropdown">
 			<a data-toggle="dropdown" class="dropdown-toggle">
 				<i class="fa fa-language fa-lg"></i>
-				<?php echo Yii::t('html', Yii::$app->language);?>
+				<?php echo Yii::t('backend_html', Yii::$app->language);?>
 				<span class="caret"></span>
 			</a>
 			<ul class="dropdown-menu dropdown-menu-right alerts-dropdown">
 				<?php foreach ($langList as $key => $val){?>
-		        <li><a href="<?= Url::to(['main/','s_lang'=>$key],true)?>"><!-- <span class="label pull-right"></span> --><img src="<?php echo staticDir.'/icon/'.$key.'.png';?>">&nbsp;&nbsp;<?php echo Yii::t('html', $key);?></a></li>
+		        <li>
+		        	<a href="<?= Url::to(['main/','s_lang'=>$key],true)?>">
+		        		<img src="<?php echo staticDir.'/icon/'.$key.'.png';?>">&nbsp;&nbsp;<?php echo Yii::t('backend_html', $key);?>
+			        </a>
+			    </li>
 		    	<?php }?>
 		    </ul>
 		</li>
@@ -82,18 +93,18 @@ use yii\helpers\url;
 		</li>
 
 		<li>
-			<a href="">
-				<span class="hidden-xs hidden-sm hidden-md"><?php echo Yii::t('html','Logout');?></span> 
+			<a href="<?= Url::to(['login/logout'],true)?>">
+				<span class="hidden-xs hidden-sm hidden-md"><?php echo Yii::t('backend_html','Logout');?></span> 
 				<i class="fa fa-sign-out fa-lg"></i>
 			</a>
 		</li>
 	</ul>
 </header>
 
-<nav id="column-left" class="active">
+<nav id="column-left">
 	<div id="profile">
 		<div>
-			<a>
+			<a href="<?= Url::to(['main/'],true)?>">
 				<i class="fa fa-user-md fa-lg fa-2x fa-pull-left fa-border"></i>
 			</a>
 		</div>
@@ -166,4 +177,7 @@ use yii\helpers\url;
 
 <?php $this->beginBlock('js'); ?>
 <?=Html::jsFile(staticDir.'/backend/js/main.js')?>
+<script type="text/javascript" src="http://static.e.com/assets/1844acfb/yii.validation.js"></script>
+<script type="text/javascript" src="http://static.e.com/assets/1844acfb/yii.activeForm.js"></script>
+
 <?php $this->endBlock(); ?>
