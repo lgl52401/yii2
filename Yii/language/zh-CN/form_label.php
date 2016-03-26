@@ -3,7 +3,9 @@ return [
 'Id'=>'id', 
 'Username'=>'用户名', 
 'Password'=>'用户密码',
-'Password_rep'	=>'确认密码',
+'Password rep'=>'确认密码',
+'Password old'=>'旧密码',
+'Password new'=>'新密码',
 'Status'=>'状态',
 'Reg Time'=>'注册时间',
 'status'=>'状态',
@@ -12,6 +14,19 @@ return [
 'Please input'	=>'请输入',
 'Sign in'=>'登录',
 'Sign up'=>'注册',
+'Action'=>'操作',
 'Sign in your account'=>'登录到您的帐户',
-'Enter username and password'=>'请输入用户名和密码进行登录'
+'Enter username and password'=>'请输入用户名和密码进行登录',
+
+
+'page_sLengthMenu'=>'每页显示 _MENU_ 条记录',
+'page_sZeroRecords'=>'抱歉,没有检索到数据',
+'page_sInfo'=>'从 _START_ 到 _END_ /共 _TOTAL_ 条数据',
+'page_sInfoEmpty'=>'没有数据',
+'page_sInfoFiltered'=>'(从 _MAX_ 条数据中检索)',
+'page_sSearch'=>'搜索',
+'page_sFirst'=>'首页',
+'page_sPrevious'=>'前一页',
+'page_sNext'=>'后一页',
+'page_sLast'=>'尾页',
 ];

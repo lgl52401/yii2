@@ -4,6 +4,15 @@ body,html{height:100%;}
 .footer{height:60px;background-color:#f5f5f5;border-top:1px solid #ddd;padding-top:20px}
 small, .small {font-size: 87%;}
 .formMsg .alert{display: none;}
+.ajax-data{ display: none; opacity:0.6; z-index: 9999; position: fixed; left: 0px; bottom: 0px; right: 0px; top: 0px; width: 100%; height: 100%; background:url(../../images/common/loading64_64.gif) no-repeat center center #fff}
+.ajax-data{background:url(../../images/common/dataSubmit.gif) no-repeat center center #fff;  z-index: 9999}
+
+.ajax-loading{display: none; width:100%;height:100%;z-index:9999;position:fixed;left:0px;bottom:0px;background:rgba(0,0,0,0.3)}
+.ajax-loading div{position: absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:url(../images/sprite.png) no-repeat center center; background-position:0 -108px;height:44px;width:44px;}
+.ajax-loading div p{background:url(../images/loading.gif) no-repeat center center ;height:100%;width:100%;}
+#getModal ._closeModel{margin-left: 10px}
+#getModal .modal-dialog{left:50%;top:50%;position:absolute;}
+
 
 /*
 	登录页面
@@ -14,15 +23,20 @@ body.login-content{background:url(../images/login_bg.png) repeat}
 #login .logo a{ display: block;width:188px; height: 50px; margin: 0 auto;}
 #login .box-login{background:#fff;border-radius:5px;box-shadow:-30px 30px 50px rgba(0,0,0,.32);overflow:hidden;padding:15px}
 #login .box-login h3,#login .box-login p{color:#7f7f7f}
-.relative{position: relative;}
+
+.field-flex{display: flex;}
+.relative{position: relative;margin-bottom: 5px}
+.relative .help-block{margin-bottom: 0px}
 .relative .input-icons{bottom:0;color:#909090;display:inline-block;font-size:14px;left:5px;line-height:35px;padding:0 3px;position:absolute;top:0;z-index:2}
 .relative input.form-control{padding-left: 26px}
 .relative .control-label{min-width:50px;line-height:30px}
 .relative .field-flex input.form-control{flex:1;min-width:80px;padding-left:12px}
-.field-flex{display: flex;}
-
-
-
+.relative label.control-label{min-width:80px; text-align: right;}
+.relative label.control-label:after { content: " :";}
+.relative.required label.control-label:after { content: " *"; color: red;}
+/*
+	主页面
+*/
 body.index-content{overflow-y:hidden;min-width:1000px}
 body.index-content a{cursor:pointer;outline:none;blr:expression(this.onFocus=this.blur());}
 #header{background:#2B233B;border-bottom:#20192c 1px solid;min-height:0;max-height: 45px; margin:0px;box-shadow:0px 2px 3px rgba(0, 0, 0, 0.2);}
@@ -86,8 +100,12 @@ body.index-content a{cursor:pointer;outline:none;blr:expression(this.onFocus=thi
 #column-left.active + #content{margin-left: 200px;}
 #content{transition:all .1s ease 0s;flex:1;}
 #rightMain{border: 0px;}
-
-
+/*
+	内页
+*/
+.lgl-content .container{padding: 10px}
+.lgl-content .tableCls{}
+.tableCls.table-striped tr.row_selected td{background: #b0bed9}
 /*flex: 0 0 auto;*/
 /* .jumbotron{text-align:center;background-color:transparent}
 .jumbotron .btn{font-size:21px;padding:14px 24px}

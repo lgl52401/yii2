@@ -1,6 +1,7 @@
 <?php
 use app\assets\AppAsset;
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 AppAsset::register($this);
 ?>
@@ -30,7 +31,7 @@ AppAsset::register($this);
     <?= $this->blocks['footer'] ?>
 <?php } ?>
 
-
+<script type="text/javascript"  src="<?php echo Url::to(['/tool/lang'],true);?>"></script>
 <?php $this->endBody() ?>
 <?php if (isset($this->blocks['js'])): ?>
     <?= $this->blocks['js'] ?>

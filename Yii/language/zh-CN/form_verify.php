@@ -1,13 +1,7 @@
 <?php
 return [ 
 'form_validation_alpha_dash'=>'用户名由字母/数字/下划线组成,且不能以数字和下划线开头', 
-'Username'		=>'用户名', 
-'Password'		=>'用户密码',
-'Password_rep'	=>'确认密码',
-'Status'		=>'状态',
-'Reg Time'		=>'注册时间',
-'status'		=>'状态',
-'verifyCode'	=>'验证码'
+
 ];
 
 $lang['form_validation_required'] 			= '{field} 必须填写.';

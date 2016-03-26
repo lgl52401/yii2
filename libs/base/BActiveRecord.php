@@ -36,34 +36,34 @@ class BActiveRecord extends ActiveRecord
 	{
 		$configs  = ['start'=>0,'pageSize'=>30,'order'=>''];
 		$config  += $configs;
-		$rows 	  = [];
+		$rows 	= [];
 		$param    = json_decode(Yii::$app->request->post('pageparam'),true);
-		$draw  	  = isset($param[0]['value']) ? $param[0]['value'] : 1;
-		$draw  	  = max(1,intval($draw));
+		$draw  	= isset($param[0]['value']) ? $param[0]['value'] : 1;
+		$draw  	= max(1,intval($draw));
 		$pageSize = isset($param[4]['value']) ? $param[4]['value'] : $configs['pageSize'];
 		$pageSize = min(500,intval($pageSize));
 		$start    = isset($param[3]['value']) ? $param[3]['value'] : $configs['start'];
 		$start    = max(0,intval($start));
 		$page     = floor($start / $pageSize) + 1;
 		
-		$start 	  = ($page-1) * $pageSize;
-		$limit 	  = $pageSize;
+		$start 	= ($page-1) * $pageSize;
+		$limit 	= $pageSize;
 		$number   = $query->count();
 		if($number > 0)
 		{
 			$rows = $query->offset($start)->limit($limit);
-	        if(!empty($config['order']))
-	        {
-	            $rows = $rows->orderBy($config['order']);
-	        }
-	        $rows = $rows->all();
+			if(!empty($config['order']))
+			{
+				$rows = $rows->orderBy($config['order']);
+			}
+	        	$rows = $rows->all();
 		}
 		$data = [
-				'draw'			 =>$draw,
-				'recordsFiltered'=>$number,
-				'recordsTotal'	 =>$number,
-				'data'			 =>$rows
-				 ];
+				'draw'			=>$draw,
+				'recordsFiltered'	=>$number,
+				'recordsTotal'	 	=>$number,
+				'data'			=>$rows
+				];
 		return $data;
 	}
 
@@ -235,12 +235,17 @@ class BActiveRecord extends ActiveRecord
 		{
 			$dump = VarDumper::dumpAsString($this);
 			Yii::info($dump, '_form');
-			/*if(Yii::$app->request->isAjax)
+			if(Yii::$app->request->isAjax)
 			{
 				$ret = $this->outResult();
-				$ret['data'] = $errors;
+				$ret['msg'] .= '</br><span>';
+				foreach ($errors as $key => $val)
+				{
+					$ret['msg'] .= $val[0].'</br>';
+				}
+				$ret['msg'] .= '</span>';
 				exit(json_encode($ret));
-			}*/
+			}
 			return false;
 			//throw new NotFoundHttpException(json_encode($errors));
 		}

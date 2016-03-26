@@ -19,6 +19,7 @@ class BController extends Controller
     */
     public function outResult($msg = '')
     {
+        $msg    = $msg ? $msg : Yii::t('backend_html', 'Sorry, your request input does not exist');
         $result = ['success'=>false,'msg'=>$msg,'data'=>'','ids'=>''];
         return $result;
     }

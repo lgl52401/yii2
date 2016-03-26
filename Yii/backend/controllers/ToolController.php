@@ -141,4 +141,30 @@ class ToolController extends BaseController
     {
         return QrCode::png('test');
     }
+
+    /*
+        js语言
+    */
+    public function actionLang()
+    {
+        $lang = Yii::$app->language;
+        $ckey = 'js_lang'.$lang;
+        $js = Yii::$app->FileCache->get('js_lang');
+
+        if(!$js)
+        {
+            $file_path = Yii::$app->getI18n()->translations['js*']['basePath'].'/'.$lang.'/js.php';
+            $data      = require(Yii::getAlias($file_path));
+            $js  = '';
+            $js .= 'var js_lang = [];'.PHP_EOL;
+            //$js .= 'var nowDirs = "'.rtrim(site_url(TBT_DIR.'/base/main/'),'.html').'";'.PHP_EOL;
+            foreach ($data as $key => $val)
+            {
+                $js .= 'js_lang.'.$key.' = "'.$val.'";'.PHP_EOL;
+            }
+            $js .= '';
+            Yii::$app->FileCache->set($ckey,$js);
+        }
+        exit($js);
+    }
 }

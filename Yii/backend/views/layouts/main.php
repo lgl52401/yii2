@@ -1,8 +1,9 @@
 <?php
-use app\assets\AppAsset;
+use app\assets\TableAsset;
 use yii\helpers\Html;
+use yii\helpers\Url;
 
-AppAsset::register($this);
+TableAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -13,8 +14,11 @@ AppAsset::register($this);
 <?php echo Html::csrfMetaTags() ?>
 <title><?php echo Html::encode($this->title) ?></title>
 <?php $this->head() ?>
+<?php if (isset($this->blocks['css'])): ?>
+    <?= $this->blocks['css'] ?>
+<?php endif; ?>
 </head>
-<body>
+<body class="lgl-content <?php if(isset($this->context->layout_data['cls']))echo $this->context->layout_data['cls'];?>">
 <?php $this->beginBody() ?>
 
 <div class="wrap">
@@ -22,16 +26,11 @@ AppAsset::register($this);
         <?php echo $content ?>
     </div>
 </div>
-
-<footer class="footer">
-    <div class="container">
-        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
-
-        <p class="pull-right"><?php echo Yii::powered() ?></p>
-    </div>
-</footer>
-
+<script type="text/javascript"  src="<?php echo Url::to(['/tool/lang'],true);?>"></script>
 <?php $this->endBody() ?>
+<?php if (isset($this->blocks['js'])): ?>
+    <?= $this->blocks['js'] ?>
+<?php endif; ?>
 </body>
 </html>
 <?php $this->endPage() ?>

@@ -107,7 +107,6 @@ $(function(){
                 breadcrumb = breadcrumb ? '<i class="fa fa-location-arrow fa-lg"></i>&nbsp;&nbsp;'+breadcrumb : '';
                 $('.lbreadcrumb a').html(breadcrumb);
         }
-
     })
 })
 

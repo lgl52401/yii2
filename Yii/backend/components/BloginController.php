@@ -5,7 +5,7 @@ use app\components\BaseController;
 use yii\helpers\Url;
 use app\models\Admin;
 
-class AdminController extends BaseController
+class BloginController extends BaseController
 {
 	public function init()
 	{
@@ -13,6 +13,16 @@ class AdminController extends BaseController
 	}
 
     public function beforeAction($action)
+    {
+        $this->checkLogin();
+        return true;
+    }
+
+    /**
+    * 后台用户登录
+    *
+    */  
+    public function checkLogin()
     {
         $this->beforeExt();
         $this->auto_lang();
@@ -26,6 +36,5 @@ class AdminController extends BaseController
             }
             return $this->redirect(Url::to(['login/'],true));
         }
-        return true;
     }
 }

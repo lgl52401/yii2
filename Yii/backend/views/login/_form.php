@@ -13,7 +13,7 @@ use yii\captcha\Captcha;
 	'validateOnSubmit'=>true,
 	'fieldConfig'=>[
 				'options'  => ['tag' => 'div','class' => 'form-group relative'],
-				'template' => '<div class="field-flex">{label}{input}<div class="help-block">{error}</div></div>',
+				'template' => '<div class="field-flex">{label}{input}{error}</div>',
 				]
 	]); ?>
 

@@ -19,7 +19,8 @@ class BAsset extends AssetBundle
     public $js       = [];
     public $depends  = [
                         'yii\web\YiiAsset',
-                        'yii\bootstrap\BootstrapAsset',
+                        'yii\bootstrap\BootstrapPluginAsset',
+                        'yii\widgets\ActiveFormAsset'
                         ];
 
     public function init()
@@ -42,7 +43,7 @@ class BAsset extends AssetBundle
     }
 
     //加载原生态组件
-    public static function loadAsset($Asset='yii\bootstrap\BootstrapAsset',$css=['css/bootstrap.min.css'],$js=['js/bootstrap.min.js'])
+    /*public static function loadAsset($Asset='yii\bootstrap\BootstrapAsset',$css=['css/bootstrap.min.css'],$js=['js/bootstrap.min.js'])
     {
         $temp = [];
         if($css)$temp['css'] = $css;
@@ -51,6 +52,5 @@ class BAsset extends AssetBundle
         {
             \Yii::$app->assetManager->bundles[$Asset] = $temp;
         }
-        
-    }
+    }*/
 }

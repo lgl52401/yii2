@@ -177,7 +177,7 @@ use yii\helpers\url;
 
 <?php $this->beginBlock('js'); ?>
 <?=Html::jsFile(staticDir.'/backend/js/main.js')?>
-<script type="text/javascript" src="http://static.e.com/assets/1844acfb/yii.validation.js"></script>
+<!-- <script type="text/javascript" src="http://static.e.com/assets/1844acfb/yii.validation.js"></script>
 <script type="text/javascript" src="http://static.e.com/assets/1844acfb/yii.activeForm.js"></script>
-
+ -->
 <?php $this->endBlock(); ?>

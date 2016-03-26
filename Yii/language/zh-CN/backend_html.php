@@ -8,4 +8,8 @@ return [
 'Save'=>'保存',
 'Cancel'=>'取消',
 'Close'=>'关闭',
+'Error'=>'错误',
+'Sorry, your request input does not exist'=>'对不起,你请求的输入不存在',
+'Successful operation'=>'操作成功',
+'operation failed'=>'操作失败',
 ];

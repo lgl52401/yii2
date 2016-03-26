@@ -17,6 +17,7 @@ class Admin extends \libs\base\BActiveRecord
 {
     public $admin_key = 'admin_data_';
     public $password_rep;
+    public $password_old;
     public $verifyCode;
 
     /**
@@ -33,18 +34,20 @@ class Admin extends \libs\base\BActiveRecord
     public function rules()
     {
         return [
-                [['password_rep'],'required','on'=>'create'],
-                ['password_rep','compare','compareAttribute'=>'password','on'=>'create'],
+                [['password_rep','password_old'],'required','on'=>['account','create','update']],
+                ['password_rep','compare','compareAttribute'=>'password','on'=>['account','create','update']],
+
+                [['status'],'required','on'=>['create','update']],
+
+                ['verifyCode', 'captcha','captchaAction'=>'tool/captcha','on'=>'index'],
 
                 [['username','password'],'required'],
                 ['username','match','pattern'=>'/^[a-z][a-z0-9_]{2,}/','message'=>Yii::t('form_verify', 'form_validation_alpha_dash')],
 
-                ['verifyCode', 'captcha','captchaAction'=>'tool/captcha','on'=>'index'],
-
                 [['status'], 'integer'],
                 [['reg_time'], 'safe'],
                 [['username'], 'string', 'min'=>3, 'max' => 30],
-                [['password'], 'string', 'min'=>6, 'max' => 32],
+                [['password','password_old'], 'string', 'min'=>6, 'max' => 32],
         ];
     }
 
@@ -57,7 +60,8 @@ class Admin extends \libs\base\BActiveRecord
             'aid'           => Yii::t('form_label', 'Id'),
             'username'      => Yii::t('form_label', 'Username'),
             'password'      => Yii::t('form_label', 'Password'),
-            'password_rep'  => Yii::t('form_label', 'Password_rep'),
+            'password_rep'  => Yii::t('form_label', 'Password rep'),
+            'password_old'  => Yii::t('form_label', 'Password old'),
             'status'        => Yii::t('form_label', 'Status'),
             'reg_time'      => Yii::t('form_label', 'Reg Time'),
             'verifyCode'    => Yii::t('form_label', 'verifyCode'),
@@ -93,7 +97,6 @@ class Admin extends \libs\base\BActiveRecord
     /**
     * 判断用户是否登录
     *
-    * @property string 跳转的链接
     */    
     public function checkLogin()
     {
@@ -110,9 +113,8 @@ class Admin extends \libs\base\BActiveRecord
     /**
     * 退出系统
     *
-    * @property string 跳转的链接
     */
-    public function logout($ulr = '')
+    public function logout()
     {
         $session = Yii::$app->session;
         if (!$session->isActive)$session->open();
@@ -186,6 +188,11 @@ class Admin extends \libs\base\BActiveRecord
         return null;
     }
 
+    /**
+    * 用户删除
+    *
+    * @property integer|array $ids
+    */
     public function _delete($ids = '')
     {
         $ids = to_intval($ids,2);
@@ -210,14 +217,15 @@ class Admin extends \libs\base\BActiveRecord
     {
         if (parent::beforeSave($insert))
         {
-            $fields = $this->rules();
             $this->filterData(['integer'=>['status']]);
-            /*if($this->isNewRecord)
+            if($this->isNewRecord)//添加
             {
-
-            }*/
-            unset($this->created);
-            unset($this->date_end);
+                $this->reg_time = date('Y-m-d',SYS_TIME);
+            }
+            else//修改
+            {
+                unset($this->reg_time,$this->aid,$this->username);
+            }    
             return true;
         } 
         else 
@@ -241,9 +249,9 @@ class Admin extends \libs\base\BActiveRecord
             }
             else
             {
-                Yii::$app->FileCache->delete($this->route_key. $this->route_id);
+                Yii::$app->FileCache->delete($this->admin_key. $this->aid);
                 //echo 'update'.$insert;
-            }    
+            }   
         }
     }
 }

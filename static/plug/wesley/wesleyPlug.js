@@ -104,12 +104,12 @@ jQuery.dialog = {
     },
     actions:function(param,callback)
     {          
-        var defaults = {msg:'标题',content:'-'};
+        var defaults = {msg:js_lang.title,content:'-'};
              options = $.extend(defaults,param);
              obj     = $('#'+options.obj.attr('data-id'));
              if(!obj.length)
              {
-                $.dialog.dark({'msg':'缺少对象'});
+                $.dialog.dark({'msg':js_lang.missing_url_objects});
                 return false;
              }
         var str  = '';
@@ -118,7 +118,7 @@ jQuery.dialog = {
             str += obj.html();
             str += '</div>';
             str += '<div class="modal-actions-group">';
-            str += '<button class="button-secondary pure-button button-block modal-actions-cancel">取消</button>';
+            str += '<button class="button-secondary pure-button button-block modal-actions-cancel">'+js_lang.cancel+'</button>';
             str += '</div>';
             str += '</div>';
         var overlay = $("<div id='lean_overlay' class='ui-mask'></div>");
@@ -134,7 +134,7 @@ jQuery.dialog = {
     },
     dark:function(param,callback)
     {
-        var defaults  = {msg:'标题',time:'3'};
+        var defaults  = {msg:js_lang.title,time:'3'};
              options  = $.extend(defaults,param);
              var str  = '<div class="modal-dark">';
                  str += '<p>';
@@ -160,12 +160,12 @@ jQuery.dialog = {
     },
     popup:function(param,callback)
     {
-        var defaults = {msg:'标题',obj:''};
+        var defaults = {msg:js_lang.title,obj:''};
              options = $.extend(defaults,param);
              obj     = $('#'+options.obj.attr('data-id'));
              if(!obj.length)
              {
-                $.dialog.dark({'msg':'缺少对象'});
+                $.dialog.dark({'msg':js_lang.missing_url_objects});
                 return false;
              }
         var str  = '<div class="modal-popup">';
@@ -189,7 +189,7 @@ jQuery.dialog = {
     },
     notifi:function(param,callback)
     {   
-        var defaults = {msg:'-',info:'系统提示',time:'5'};
+        var defaults = {msg:'-',info:js_lang.system_infos,time:'5'};
              options = $.extend(defaults,param);     
         var str  = '<div class="notification" style="display:none">';
             str += '<div class="notification-content">';
@@ -219,7 +219,7 @@ jQuery.dialog = {
     },
     init:function(options,callback)
     {
-        var defaults = {msg:'-',closeButton:null,info:'系统提示',placeholder:'','close':''};
+        var defaults = {msg:'-',closeButton:null,info:js_lang.system_infos,placeholder:'','close':''};
              options = $.extend(defaults,options);
              style   = '';
         if(options.type == 4) style = 'style="border:0px"';
@@ -251,11 +251,11 @@ jQuery.dialog = {
             str += '</div>';
             str += '</div>';
             str += '<div class="ui-dialog-btns" >';
+            if(options.type != 4) str += '<a class="ui-btn ui-btn-2">'+js_lang.confirm+'</a>';
             if(options.type == 2 || options.type == 3)
             {
-                str += '<a class="ui-btn ui-btn-1">取消</a>';
+                str += '<a class="ui-btn ui-btn-1">'+js_lang.cancel+'</a>';
             }
-            if(options.type != 4) str += '<a class="ui-btn ui-btn-2">确定</a>';
             str += '</div>';
             str += '</div>'; 
         $('.ui-dialog').remove();

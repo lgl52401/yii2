@@ -46,7 +46,7 @@ $config = [
                                         'sourceLanguage'=>'en-US',
                                         'fileMap'       =>[],
                                         ],
-                                'html*'=>[
+                                'js*'=>[
                                         'class'         =>'yii\i18n\PhpMessageSource',
                                         'basePath'      =>'@app/../language',
                                         'sourceLanguage'=>'en-US',
@@ -149,7 +149,10 @@ $config = [
 									'css' => ['https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css']
 								],*/
 						     ],
-	  					]
+	  					],
+        'view' => [
+            'class' => 'libs\base\BView',
+        ],                
     		],
     
 ];

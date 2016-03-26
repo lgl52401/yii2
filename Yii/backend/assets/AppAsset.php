@@ -16,8 +16,11 @@ class AppAsset extends BAsset
     public function init()
     {
         parent::init();
-        parent::loadAsset();
-        $this->css      = ['backend/css/base.css','plug/font-awesome/css/font-awesome.min.css','plug/wesley/wesleyPlug.css'];
-        $this->js       = ['backend/js/base.js','plug/wesley/wesleyPlug.js'];
+        //parent::loadAsset();
+
+        /*$temp['js'] = ['yii.validation.js','yii.activeForm.js'];
+        \Yii::$app->assetManager->bundles['yii\web\YiiAsset'] = [];*/
+        $this->css      = ['plug/font-awesome/css/font-awesome.min.css','plug/wesley/wesleyPlug.css','backend/css/base.css'];
+        $this->js       = ['plug/wesley/wesleyPlug.js','backend/js/base.js'];
     }
 }
