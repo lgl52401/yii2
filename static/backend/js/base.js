@@ -117,7 +117,7 @@ function _ajax_html(url,temp,div_id)
             if(i >= 0)
             {
                 ta = _try_return(json);      
-                $.dialog.alert(ta.msg);
+                $.dialog.alert({'msg':ta.msg});
                 tun = 0;
             }
             else
@@ -221,9 +221,11 @@ $(function(){
     */ 
     $(document).on('click','._del',function(){
         url = $(this).attr('data-url');
+        ID  = $(this).attr('data-id');
+        ID  = ID ? 'id='+ID : '';
         if(!url)return false;
         $.dialog.confirm({'msg':js_lang.sure_do},function(){
-            tmp = _ajax_com_data(url);
+            tmp = _ajax_com_data(url,ID);
             if(tmp == -1)
             {
                 tableReload();
@@ -238,15 +240,15 @@ $(function(){
     /*
     批量删除
     */
-    $(document).on('click','#deleteFun',function(){
-        url = $(this).attr('date-url');
+    $(document).on('click','.deleteFun',function(){
+        url = $(this).attr('data-url');
         if(!url)
         {
             $.dialog.alert({'msg':js_lang.missing_parameters});
             return false;
         }
         var str = '';
-           $obj = $(this).parents('.checkParent:first')
+           $obj = $(this).parents('.row-fluid:first').prev('.checkParent:first');
         $obj.find("input[name='checkList']:checked").each(function (i, o) {
             str += $(this).val();
             str += ",";

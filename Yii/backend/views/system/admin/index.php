@@ -91,11 +91,11 @@ function initTable()
                             'sNext'     : '<?=Yii::t("form_label", "page_sNext");?>',
                             'sLast'     : '<?=Yii::t("form_label", "page_sLast");?>'
                         },
-                        'sProcessing'   : '<img src="<?php echo staticDir.'/backend/images/loading_line.gif'; ?>" />'
+                        'sProcessing'   : '<div><p></p></div>'
                     },
         'fnInitComplete': function (oSettings, json)
                         {
-                            
+                            $('.alldel').html('<a class="btn btn-danger deleteFun" data-url="ss">批量删除</a>');
                         },
         'aoColumns' : [
                         {
@@ -108,13 +108,13 @@ function initTable()
                         {'mDataProp': 'aid','sClass': 'text-center','sWidth' : '50px'},
                         {'mDataProp': 'username','sClass': 'text-left'},
                         {'mDataProp': 'status','sClass': 'text-center','sWidth' : '40px'},
-                        {'mDataProp': 'reg_time','sClass': 'text-center','sWidth' : '120px'},
+                        {'mDataProp': 'reg_time','sClass': 'text-center','sWidth' : '100px'},
                         {
                             'mDataProp': 'aid',
                             'sWidth' : '80px',
                             'fnCreatedCell': function (nTd, sData, oData, iRow, iCol)
                             {
-                                var cont ='<a class="btn btn-danger btn-xs _del" data-url="http://admin.e.com/system/delete.shtml?id='+sData+'" href="javascript:void(0);" title="删除"><span class="glyphicon glyphicon-trash"></span></a>';
+                                var cont ='<a class="btn btn-danger btn-xs _del" data-url="http://admin.e.com/system/delete.shtml" data-id="'+sData+'"><span class="glyphicon glyphicon-trash"></span></a>';
                                 $(nTd).html(cont);
                             }
                         }

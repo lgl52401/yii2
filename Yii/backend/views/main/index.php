@@ -30,6 +30,11 @@ use yii\helpers\url;
 				<i class="fa fa-refresh fa-lg"></i>
 			</a>
 		</li>
+		<li id="view-fullscreen">
+			<a>
+				<i class="fa fa-arrows-alt fa-lg"></i>
+			</a>
+		</li>
 		<li>
 			<a class="_loadModel" data-url="<?= Url::to(['main/account'],true)?>">
 				<i class="fa fa-user fa-lg"></i>
