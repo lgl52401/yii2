@@ -95,7 +95,7 @@ function initTable()
                     },
         'fnInitComplete': function (oSettings, json)
                         {
-                            $('.alldel').html('<a class="btn btn-danger deleteFun" data-url="ss">批量删除</a>');
+                            $('.alldel').html('<a class="btn btn-danger btn-sm deleteFun" data-url="ss">批量删除</a>');
                         },
         'aoColumns' : [
                         {

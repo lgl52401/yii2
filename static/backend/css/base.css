@@ -111,6 +111,7 @@ body.index-content a{cursor:pointer;outline:none;blr:expression(this.onFocus=thi
 .dataTables_length label{margin-bottom: 0px}
 div.dataTables_info{padding:0px 0px 0px 20px;line-height: 34px}
 .row-fluid .alldel{margin-right: 20px}
+.row-fluid .alldel a{height:32px;line-height: 22px}
 .row-fluid .clear {float: none;}
 div.dataTables_paginate ul.pagination{margin:0px}
 div.dataTables_processing{position: fixed;}
