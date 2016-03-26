@@ -20,6 +20,9 @@ class MainController extends BloginController
     */  
     public function actionIndex()
     {
+        /*$this->getView()->title = 'LGL';
+        $this->getView()->metaTags['keywords'] = '';
+        $this->getView()->metaTags['description'] = '';*/
         return $this->render('index',['langList'=>Yii::$app->params['lang_backend']]);
     }
 

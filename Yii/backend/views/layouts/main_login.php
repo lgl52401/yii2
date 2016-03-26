@@ -12,7 +12,10 @@ AppAsset::register($this);
 <meta charset="<?= Yii::$app->charset ?>">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <?php echo Html::csrfMetaTags() ?>
-<title><?php echo Html::encode($this->title) ?></title>
+<title><?php echo Html::encode(($this->title ? $this->title . ' - ' : '') . Yii::$app->name); ?></title>
+<meta name="description" content="<?php echo isset($this->metaTags['description']) ? $this->metaTags['description'] : ''; ?>" />
+<meta name="keywords" content="<?php echo isset($this->metaTags['keywords']) ? $this->metaTags['keywords'] : ''; ?>" />
+<link type="image/x-icon" href="<?php echo staticDir;?>/icon/favicon.ico" rel="shortcut icon">
 <?php $this->head() ?>
 <?php if (isset($this->blocks['css'])): ?>
     <?= $this->blocks['css'] ?>
@@ -31,11 +34,13 @@ AppAsset::register($this);
     <?= $this->blocks['footer'] ?>
 <?php } ?>
 
+<div class="js-container">
 <script type="text/javascript"  src="<?php echo Url::to(['/tool/lang'],true);?>"></script>
 <?php $this->endBody() ?>
 <?php if (isset($this->blocks['js'])): ?>
     <?= $this->blocks['js'] ?>
 <?php endif; ?>
+</div>
 </body>
 </html>
 <?php $this->endPage() ?>

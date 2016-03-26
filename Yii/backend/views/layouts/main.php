@@ -13,6 +13,7 @@ TableAsset::register($this);
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <?php echo Html::csrfMetaTags() ?>
 <title><?php echo Html::encode($this->title) ?></title>
+<link type="image/x-icon" href="<?php echo staticDir;?>/icon/favicon.ico" rel="shortcut icon">
 <?php $this->head() ?>
 <?php if (isset($this->blocks['css'])): ?>
     <?= $this->blocks['css'] ?>
@@ -26,11 +27,14 @@ TableAsset::register($this);
         <?php echo $content ?>
     </div>
 </div>
+
+<div class="js-container">
 <script type="text/javascript"  src="<?php echo Url::to(['/tool/lang'],true);?>"></script>
 <?php $this->endBody() ?>
 <?php if (isset($this->blocks['js'])): ?>
     <?= $this->blocks['js'] ?>
 <?php endif; ?>
+</div>
 </body>
 </html>
 <?php $this->endPage() ?>

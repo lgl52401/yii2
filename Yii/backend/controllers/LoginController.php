@@ -26,7 +26,7 @@ class LoginController extends BaseController
         {
             return $this->redirect(Url::to(['main/'],true));
         }
-        
+        $this->getView()->title = '登录界面';
         $model->scenario = 'index';
         $data = Yii::$app->request->post();
         if($model->load($data))

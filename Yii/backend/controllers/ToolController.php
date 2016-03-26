@@ -134,6 +134,27 @@ class ToolController extends BaseController
         exit(json_encode([]));*/
     }
 
+    /**
+    * 发送邮件
+    */
+    public function actionSendmail()
+    {
+        $mail= Yii::$app->mailer->compose();
+        $mail->setTo('491034123@qq.com');
+        $mail->setSubject("邮件测试test---");
+        //$mail->setTextBody('zheshisha ');   //发布纯文字文本
+        $mail->setHtmlBody("<br>sadsadasdasd");    //发布可以带html标签的文本
+        if($mail->send())  
+        {
+            echo "success";  
+        }
+        else  
+       {
+         echo "failse";   
+       }
+        die(); 
+    }
+
     /*
         二维码
     */
