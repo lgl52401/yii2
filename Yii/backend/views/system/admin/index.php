@@ -1,6 +1,9 @@
+<?php
+use yii\helpers\Url;
+?>
 <div class='form-inline'>
     <div class="form-group">
-    </div>  <div class="form-group">
+        <a class="btn btn-primary btn-sm create _loadModel" data-url="<?=Url::to(["system/admin/create"],true) ?>"><i class="fa fa-plus fa-1x"></i> 添加</a>
     </div>  
 </div>
 <table id="lgl-table" cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered table-hover tableCls checkParent">
@@ -22,30 +25,39 @@
 <script type="text/javascript">
 var oTable;
 $(document).ready(function() {
-     initTable();
-     $('.search').click(function(){
+    initTable();
+    $('.search').click(function(){
         oTable.fnDraw(); 
-     })
+    })
+    if($('.dataTables_filter').length)
+    {
+        $('.dataTables_filter').prepend('<label></label>');
+        $('.dataTables_filter label:first').html($('.create'));
+    }
 })
 function retrieveData(sSource, aoData, fnCallback )
 {
-    var parame  = [];
+    var parame  = {};
     var url     = '';
+    $.each(parame,function(n,value){
+        url += '&'+n+'='+value;
+    });
     $.ajax( {     
         type: "POST",      
         url: '<?=$this->nowUrl(["act"=>"load"]); ?>',   
         dataType:"json",  
-        data:"pageparam="+JSON.stringify(aoData)+'&'+url, //以json格式传递(struts2后台还是以string类型接受),year和month直接作为参数传递。  
+        data:"pageparam="+JSON.stringify(aoData)+url,
         success: function(data)
         {   
-            fnCallback(data); //服务器端返回的对象的returnObject部分是要求的格式     
+            fnCallback(data);
         }     
     });    
 }
 
 function initTable()
 {
-    oTable = $('#lgl-table').dataTable( {
+    oTable = $('#lgl-table').dataTable({
+        'fixedHeader'   : true,
         'processing'    : true,
         'bPaginate'     : true,
         'bDestory'      : true,
@@ -55,9 +67,9 @@ function initTable()
         'bSort'         : true,
         'bProcessing'   : true,
         'serverSide'    : true,
-        'fnServerData'  :retrieveData,
-        'aoColumnDefs'  : [{'bSortable':false,'aTargets':[0,2,3,4,5]}],
-        'aaSorting'     : [[ 1, 'desc']]  ,
+        'fnServerData'  : retrieveData,
+        'aoColumnDefs'  : [{'bSortable':false,'aTargets':[0,3,4,5]}],
+        'aaSorting'     : [[ 1, 'desc']],
         'aLengthMenu'   : [30, 50, 100],
         'sDom'          : 'frt<"row-fluid"<"clear" <"alldel"> li>p>',
         'iDisplayLength': 30, 
@@ -95,7 +107,7 @@ function initTable()
                     },
         'fnInitComplete': function (oSettings, json)
                         {
-                            $('.alldel').html('<a class="btn btn-danger btn-sm deleteFun" data-url="ss">批量删除</a>');
+                            $('.alldel').html(g_c(7,'<?= Url::to(["system/admin/delete"],true)?>'));
                         },
         'aoColumns' : [
                         {
@@ -107,15 +119,21 @@ function initTable()
                         },
                         {'mDataProp': 'aid','sClass': 'text-center','sWidth' : '50px'},
                         {'mDataProp': 'username','sClass': 'text-left'},
-                        {'mDataProp': 'status','sClass': 'text-center','sWidth' : '40px'},
+                        {'mDataProp': 'status','sClass': 'text-center','sWidth' : '40px',
+                            'fnCreatedCell': function (nTd, sData, oData, iRow, iCol)
+                            {
+                                $(nTd).html(g_l(sData));
+                            }
+                        },
                         {'mDataProp': 'reg_time','sClass': 'text-center','sWidth' : '100px'},
                         {
                             'mDataProp': 'aid',
                             'sWidth' : '80px',
                             'fnCreatedCell': function (nTd, sData, oData, iRow, iCol)
                             {
-                                var cont ='<a class="btn btn-danger btn-xs _del" data-url="http://admin.e.com/system/delete.shtml" data-id="'+sData+'"><span class="glyphicon glyphicon-trash"></span></a>';
-                                $(nTd).html(cont);
+                                var i  = g_c(1,'<?=Url::to(["system/admin/update"],true) ?>','id='+sData);
+                                    i += g_c(2,'<?=Url::to(["system/admin/delete"],true) ?>','id='+sData);
+                                $(nTd).html(i);
                             }
                         }
                       ]

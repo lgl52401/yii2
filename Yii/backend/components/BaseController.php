@@ -3,6 +3,9 @@ namespace app\components;
 use Yii;
 use libs\base\BController;
 
+/**
+ * 未登录继承基类
+ */
 class BaseController extends BController
 {
 	public function init()

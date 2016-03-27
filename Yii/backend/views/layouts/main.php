@@ -19,7 +19,7 @@ TableAsset::register($this);
     <?= $this->blocks['css'] ?>
 <?php endif; ?>
 </head>
-<body class="lgl-content <?php if(isset($this->context->layout_data['cls']))echo $this->context->layout_data['cls'];?>">
+<body class="lgl-content <?php if(isset($this->context->layout_data) && isset($this->context->layout_data['cls']))echo $this->context->layout_data['cls'];?>">
 <?php $this->beginBody() ?>
 
 <div class="wrap">

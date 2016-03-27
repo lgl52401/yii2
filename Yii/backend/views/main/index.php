@@ -114,7 +114,7 @@ use yii\helpers\url;
 			</a>
 		</div>
 		<div class="user-info">
-			<h4>demo demod</h4>
+			<h4><?= $userInfo['username']; ?></h4>
 			<small>Management System</small>
 		</div>
 	</div>

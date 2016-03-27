@@ -4,15 +4,10 @@ body,html{height:100%;}
 .footer{height:60px;background-color:#f5f5f5;border-top:1px solid #ddd;padding-top:20px}
 small, .small {font-size: 87%;}
 .formMsg .alert{display: none;}
-.ajax-data{ display: none; opacity:0.6; z-index: 9999; position: fixed; left: 0px; bottom: 0px; right: 0px; top: 0px; width: 100%; height: 100%; background:url(../../images/common/loading64_64.gif) no-repeat center center #fff}
-.ajax-data{background:url(../../images/common/dataSubmit.gif) no-repeat center center #fff;  z-index: 9999}
 
-.ajax-loading{display: none; width:100%;height:100%;z-index:9999;position:fixed;left:0px;bottom:0px;background:rgba(0,0,0,0.3)}
-.ajax-loading div,.dataTables_processing div{position: absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:url(../images/sprite.png) no-repeat center center; background-position:0 -108px;height:44px;width:44px;}
-.ajax-loading div p,.dataTables_processing div p{background:url(../images/loading.gif) no-repeat center center ;height:100%;width:100%;}
 #getModal ._closeModel{margin-left: 10px}
 #getModal .modal-dialog{left:50%;top:50%;position:absolute;}
-
+#getModal .modal-body{padding-bottom: 0px}
 
 /*
 	登录页面
@@ -31,6 +26,7 @@ body.login-content{background:url(../images/login_bg.png) repeat}
 .relative input.form-control{padding-left: 26px}
 .relative .control-label{min-width:50px;line-height:30px}
 .relative .field-flex input.form-control{flex:1;min-width:80px;padding-left:12px}
+.relative .field-flex input[type="radio"]{margin-right: 5px;margin-top: 8px}
 .relative label.control-label{min-width:80px; text-align: right;}
 .relative label.control-label:after { content: " :";}
 .relative.required label.control-label:after { content: " *"; color: red;}
@@ -111,10 +107,12 @@ body.index-content a{cursor:pointer;outline:none;blr:expression(this.onFocus=thi
 .dataTables_length label{margin-bottom: 0px}
 div.dataTables_info{padding:0px 0px 0px 20px;line-height: 34px}
 .row-fluid .alldel{margin-right: 20px}
-.row-fluid .alldel a{height:32px;line-height: 22px}
 .row-fluid .clear {float: none;}
 div.dataTables_paginate ul.pagination{margin:0px}
 div.dataTables_processing{position: fixed;}
+div.dataTables_filter {text-align: left;}
+div.dataTables_filter .create{ margin-right: 10px;}
+div.dataTables_filter label{margin-bottom: 0px}
 /*flex: 0 0 auto;*/
 /* .jumbotron{text-align:center;background-color:transparent}
 .jumbotron .btn{font-size:21px;padding:14px 24px}

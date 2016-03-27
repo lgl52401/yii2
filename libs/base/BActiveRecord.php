@@ -17,6 +17,7 @@ class BActiveRecord extends ActiveRecord
 	{
 		parent::init();
 		$this->db = new \yii\db\Query();
+		$this->db->from($this::tableName());
 	}
 
 	/*
@@ -28,6 +29,25 @@ class BActiveRecord extends ActiveRecord
 		$result = ['success'=>false,'msg'=>$msg,'data'=>'','ids'=>''];
 		return $result;
 	}
+
+	/*
+		排序
+    */
+    function sortList($orderby = array(),$param=[])
+    {
+	    	$columns = $param[1]['value'];
+	    	$order   = $param[2]['value'];
+	    	$ret     = '';
+	    	if($orderby)
+	    	{
+	    		if($order[0] && isset($columns[$order[0]['column']]['data']))
+	    		{
+	    			$temp = $order[0]['dir']=='asc' ? 'asc':'desc';
+	    			$ret  = $columns[$order[0]['column']]['data'].' '.$temp;
+	    		}
+	    	}
+	    	return $ret;
+    }
 
 	/*
 		Ajax 请求是使用
@@ -54,9 +74,31 @@ class BActiveRecord extends ActiveRecord
 			$rows = $query->offset($start)->limit($limit);
 			if(!empty($config['order']))
 			{
-				$rows = $rows->orderBy($config['order']);
+				$temp = explode(',', $config['order']);
+				$str  = '';
+				foreach ($temp as $key => $val)
+				{
+					$val = preg_replace('/\s+/', ' ', $val);
+					if($val)
+					{
+						$a = explode(' ', $val);
+						if(count($a) == 2)
+						{
+							$str .= $val.',';
+						}
+						elseif(count($a)==1)
+						{
+							$str .= $this->sortList($val,$param).',';
+						}	
+					}
+				}
+				if($str)
+				{
+					$str  = rtrim($str,',');
+					$rows = $rows->orderBy($str);
+				}
 			}
-	        	$rows = $rows->all();
+	        $rows = $rows->all();
 		}
 		$data = [
 				'draw'			=>$draw,

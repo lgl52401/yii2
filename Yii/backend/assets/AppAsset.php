@@ -21,6 +21,6 @@ class AppAsset extends BAsset
         /*$temp['js'] = ['yii.validation.js','yii.activeForm.js'];
         \Yii::$app->assetManager->bundles['yii\web\YiiAsset'] = [];*/
         $this->css      = ['plug/font-awesome/css/font-awesome.min.css','plug/wesley/wesleyPlug.css','backend/css/base.css'];
-        $this->js       = ['plug/wesley/wesleyPlug.js','backend/js/base.js'];
+        $this->js       = ['plug/wesley/wesleyPlug.js','plug/wesley/base.js'];
     }
 }

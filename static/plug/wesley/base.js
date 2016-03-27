@@ -11,6 +11,47 @@ function _try_return(data)
     } 
 }
 
+/*
+    计算页码
+*/
+function pageNum(exp1, exp2)
+{  
+    var n1 = Math.round(exp1); //四舍五入     
+    var n2 = Math.round(exp2); //四舍五入    
+    var rslt = n1 / n2; //除    
+    if (rslt >= 0)
+    {  
+        rslt = Math.floor(rslt); //返回小于等于原rslt的最大整数。     
+    }  
+    else
+    {  
+        rslt = Math.ceil(rslt); //返回大于等于原rslt的最小整数。     
+    }  
+    return rslt;  
+}
+
+/*
+    刷新数据列表
+*/ 
+function tableReload()
+{
+    if(oTable && !oTable.fnSettings().ajax)
+    {   
+        oTable.fnPageChange(pageNum(oTable.fnSettings()._iDisplayStart, oTable.fnSettings()._iDisplayLength));
+    }
+    else
+    {
+        if( 'undefined' != typeof reload)
+        {
+            location.reload();
+        }
+        else
+        {
+            oTable.api().ajax.reload();
+        } 
+    } 
+}
+
 function _ajax_data($form,$btn)
 {
 	var style    = $btn.attr('data-style');
@@ -31,6 +72,8 @@ function _ajax_data($form,$btn)
                     $formMsg.html('<div class="alert alert-success"> <i class="fa fa-check-circle"></i> <strong>'+ret.msg+'</strong><button type="button" data-dismiss="alert" class="close">×</button></div>');
                     $formMsg.find('.alert').fadeIn();
                 }
+
+                tableReload();
                 
                 if($btn.attr('data-refresh'))
                 {
@@ -88,7 +131,7 @@ function _ajax_com_data(url,temp)
            }
            else
            {
-                $.dialog.alert({'msg':ret.msg});
+                setTimeout(function(){$.dialog.alert({'msg':ret.msg});;},500);
            }
        },
        error: function () {
@@ -221,8 +264,7 @@ $(function(){
     */ 
     $(document).on('click','._del',function(){
         url = $(this).attr('data-url');
-        ID  = $(this).attr('data-id');
-        ID  = ID ? 'id='+ID : '';
+        ID  = $(this).attr('data-parame');
         if(!url)return false;
         $.dialog.confirm({'msg':js_lang.sure_do},function(){
             tmp = _ajax_com_data(url,ID);
@@ -238,7 +280,7 @@ $(function(){
     });
 
     /*
-    批量删除
+        批量删除
     */
     $(document).on('click','.deleteFun',function(){
         url = $(this).attr('data-url');

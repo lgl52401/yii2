@@ -1,8 +1,7 @@
 <?php
-
 namespace app\models;
-
 use Yii;
+use libs\libraries\Multiple_cache;
 
 /**
  * This is the model class for table "{{%admin}}".
@@ -19,6 +18,7 @@ class Admin extends \libs\base\BActiveRecord
     public $password_rep;
     public $password_old;
     public $verifyCode;
+    public $initPwd = '-0-1%*6';
 
     /**
      * @inheritdoc
@@ -34,16 +34,19 @@ class Admin extends \libs\base\BActiveRecord
     public function rules()
     {
         return [
-                [['password_rep','password_old'],'required','on'=>['account','create','update']],
+                ['username', 'unique','on'=>['create']],
+                [['password_old'],'required','on'=>['account']],
+                [['password_rep'],'required','on'=>['account','create','update']],
                 ['password_rep','compare','compareAttribute'=>'password','on'=>['account','create','update']],
 
                 [['status'],'required','on'=>['create','update']],
+                ['status', 'in', 'range' => [1, 2]],
 
                 ['verifyCode', 'captcha','captchaAction'=>'tool/captcha','on'=>'index'],
 
                 [['username','password'],'required'],
-                ['username','match','pattern'=>'/^[a-z][a-z0-9_]{2,}/','message'=>Yii::t('form_verify', 'form_validation_alpha_dash')],
-
+                ['username','match','pattern'=>'/^[a-z][a-z0-9_]{2,}$/','message'=>Yii::t('form_verify', 'form_validation_alpha_dash')],
+                
                 [['status'], 'integer'],
                 [['reg_time'], 'safe'],
                 [['username'], 'string', 'min'=>3, 'max' => 30],
@@ -198,10 +201,10 @@ class Admin extends \libs\base\BActiveRecord
         $ids = to_intval($ids,2);
         if($ids)
         {
-            $this->deleteAll(['route_id'=>$ids]);
+            $this->deleteAll(['aid'=>$ids]);
             foreach ($ids as $key => $val)
             {
-                Yii::$app->FileCache->delete($this->route_key.$val);
+                Yii::$app->FileCache->delete($this->admin_key.$val);
             }
             return true;
         }
@@ -221,9 +224,18 @@ class Admin extends \libs\base\BActiveRecord
             if($this->isNewRecord)//添加
             {
                 $this->reg_time = date('Y-m-d',SYS_TIME);
+                $this->password = $this->encryptPwd($this->password,$this->reg_time);
             }
             else//修改
             {
+                if($this->password == $this->initPwd)
+                {
+                   unset($this->password,$this->password_rep);
+                }
+                elseif($this->scenario == 'update')
+                {
+                    $this->password = $this->encryptPwd($this->password,$this->reg_time);
+                }
                 unset($this->reg_time,$this->aid,$this->username);
             }    
             return true;
@@ -243,14 +255,13 @@ class Admin extends \libs\base\BActiveRecord
     {
         if (parent::beforeSave($insert))
         {
-            if($insert)
+            if($insert)//insert
             {
                 //echo 'insert'.$insert;Yii::$app->db->getLastInsertID();
             }
-            else
+            else//update
             {
-                Yii::$app->FileCache->delete($this->admin_key. $this->aid);
-                //echo 'update'.$insert;
+                Yii::$app->FileCache->delete($this->admin_key. $this->getOldAttribute('aid'));
             }   
         }
     }

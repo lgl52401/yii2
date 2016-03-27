@@ -5,6 +5,9 @@ use app\components\BaseController;
 use yii\helpers\Url;
 use app\models\Admin;
 
+/**
+ * 已经登录继承基类
+ */
 class BloginController extends BaseController
 {
 	public function init()

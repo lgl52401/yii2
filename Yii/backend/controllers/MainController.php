@@ -23,7 +23,9 @@ class MainController extends BloginController
         /*$this->getView()->title = 'LGL';
         $this->getView()->metaTags['keywords'] = '';
         $this->getView()->metaTags['description'] = '';*/
-        return $this->render('index',['langList'=>Yii::$app->params['lang_backend']]);
+        $model = new Admin();
+        $userInfo = $model->getCache_Admin(Yii::$app->session['aid']);
+        return $this->render('index',['langList'=>Yii::$app->params['lang_backend'],'userInfo'=>$userInfo]);
     }
 
     /**
@@ -71,7 +73,7 @@ class MainController extends BloginController
         {
             unset($model->password);
             $content  = $this->renderPartial('_form_account',['model' => $model]);
-            return $this->renderAjax('../layouts/main_dialog',['content' => $content]);
+            return $this->renderAjax('@app/views/layouts/main_dialog',['content' => $content]);
         }
     }
 }
