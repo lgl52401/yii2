@@ -47,7 +47,7 @@ body.index-content a{cursor:pointer;outline:none;blr:expression(this.onFocus=thi
 #header .lbreadcrumb a{cursor: auto;}
 #header .lbreadcrumb > li > a:hover,#header .lbreadcrumb > li > a:focus{background: none;color: #fff}
 
-#column-left{box-shadow:3px -1px 4px rgba(0, 0, 0, 0.2);background:#342b47;height:100%;padding-top:44px;position:absolute;top:0;transition:all .1s ease 0s;width:50px;z-index:10}
+#column-left{box-shadow:3px -1px 4px rgba(0, 0, 0, 0.2);background:#342b47;height:100%;padding-top:44px;position:absolute;top:0;transition:all .0s ease 0s;width:50px;z-index:10}
 #column-left.active{width: 200px;}
 #column-left.active #profile{background:#342b47;z-index: 1; position: relative;border-bottom:1px solid #4f4367;display:block;overflow:hidden;padding:10px 15px;}
 #column-left #profile div {color: #c4c4c4;float: left;}
